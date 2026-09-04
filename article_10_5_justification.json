@@ -1,0 +1,26 @@
+{
+  "data_type": "Disability accommodation status (whether an employee has an active reasonable adjustment plan)",
+  "gdpr_special_category": "Health data (Article 9(1) GDPR) \u2014 information about physical or mental health condition",
+  "purpose": "Detect and correct systematic underscoring of employees with disabilities in the AI-assisted performance scoring model. The model uses proxy productivity metrics (ticket velocity, commit frequency) that are negatively correlated with disability for reasons unrelated to actual job performance.",
+  "necessity_argument": "Without knowing which employees have active reasonable adjustment plans, we cannot distinguish between (a) low productivity attributable to disability-related barriers versus (b) low productivity attributable to performance. Proxy indicators such as tenure or team size do not capture this distinction. Without the data, the bias correction cannot be validated: we cannot confirm that post-correction scores are equitable across disability status.",
+  "alternatives_considered": [
+    "Using team-normalised scores without disability data \u2014 tested in internal simulation",
+    "Excluding productivity proxy features entirely from the model",
+    "Using self-reported wellbeing survey scores as a proxy"
+  ],
+  "why_alternatives_inadequate": "Team normalisation reduces but does not eliminate the disparity (residual DPD = 0.09 in simulation). Excluding proxy features degrades model accuracy by 18% (AUC drops from 0.82 to 0.67), making the model unsuitable for its purpose. Wellbeing surveys are optional and have 34% response rate, introducing selection bias that may be worse than the original problem.",
+  "retention_period": "Data processed only during bias audit phase. Results (aggregate statistics, not individual records) retained for model lifecycle documentation. Raw disability status data deleted within 30 days of audit completion.",
+  "access_controls": [
+    "Access restricted to named members of AI Ethics Review Board only (maximum 3 persons)",
+    "Data held in isolated audit environment \u2014 not accessible from model training pipeline",
+    "Access logged and audited centrally via SIEM",
+    "DPA (Data Processing Agreement) with any third-party audit tool provider required"
+  ],
+  "lawful_basis": "Article 9(2)(b) GDPR \u2014 necessary for obligations and rights in employment law, subject to appropriate safeguards",
+  "dpo_reviewed": true,
+  "review_date": "2026-03-20",
+  "prepared_by": "AI Governance Team",
+  "created_at": "2026-03-23T22:20:53.847363",
+  "_schema": "EU_AI_Act_Article_10_5_Justification_v1",
+  "_generated_at": "2026-03-23T22:20:53.872594"
+}
