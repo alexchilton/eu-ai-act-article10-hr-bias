@@ -51,6 +51,27 @@ So the headline is not "here is how to run a bias test". It is that a
 compliance test you have not validated can clear a group that really was
 discriminated against, and the report will look clean.
 
+## notebooks/
+
+Six notebooks that test the standard bias-mitigation moves rather than
+describing them. Each one states a claim, runs it, and reports what happened.
+All outputs are committed, so they read without being run.
+
+| | Claim under test | Result |
+|---|---|---|
+| **01** proxy detection | Dropping the protected attribute and its proxies makes a model blind to it | An adversary recovers gender at **AUC 0.834**. Stripping postcode and school, the standard prescription, takes it to **0.833** |
+| **02** label choice | Bias-aware training fixes prejudiced historical labels | Training on the human decision gives **DIR 0.31, AUC 0.634**. Training on repayment instead gives **0.72 / 0.707**. The wrong label costs accuracy *and* fairness |
+| **03** impossibility | A pipeline can output "compliant" data | Group-blind and calibrated fails four-fifths at **0.68**. Forcing parity to 1.00 opens a **0.099 PPV gap** and needs different thresholds per group |
+| **04** lipstick on a pig | Projecting out the gender direction debiases embeddings | Projection falls to **0.0000**, and an SVM still recovers gender at **98.2%**. The metric was removed, not the bias |
+| **05** linear vs adversarial | Proxies can be removed | Linear probe goes to chance three different ways while a tree probe stays at **0.82**. INLP gets it to 0.67, not to chance |
+| **06** COMPAS | The recidivism fight had a right answer | Calibrated for both races **and** false positive rate 42.3% vs 22.0%. Both sides correct. Equalising one breaks the others |
+
+Notebook 4 needs GloVe 300d, which `gensim` downloads on first run (376 MB).
+Notebook 6 uses the real ProPublica file in `data/`. The rest are self-contained.
+
+The sources are in `papers/`, 13 open-access PDFs with a README mapping each
+claim to the paper behind it.
+
 ## Other results
 
 ```
