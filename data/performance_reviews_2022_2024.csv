@@ -1,0 +1,151 @@
+employee_id,rating,year,reviewer_role
+SYN-EMP-2000,3.9,2022,Line Manager
+SYN-EMP-2001,4.3,2024,Line Manager
+SYN-EMP-2002,5.0,2023,HR Business Partner
+SYN-EMP-2003,3.9,2024,Line Manager
+SYN-EMP-2004,3.2,2024,Line Manager
+SYN-EMP-2005,4.0,2024,HR Business Partner
+SYN-EMP-2006,3.4,2022,HR Business Partner
+SYN-EMP-2007,3.3,2022,HR Business Partner
+SYN-EMP-2008,4.3,2024,Line Manager
+SYN-EMP-2009,4.4,2024,Line Manager
+SYN-EMP-2010,2.5,2024,Line Manager
+SYN-EMP-2011,4.2,2022,HR Business Partner
+SYN-EMP-2012,3.7,2024,Line Manager
+SYN-EMP-2013,3.9,2024,Line Manager
+SYN-EMP-2014,3.0,2024,Line Manager
+SYN-EMP-2015,2.9,2022,HR Business Partner
+SYN-EMP-2016,3.3,2023,HR Business Partner
+SYN-EMP-2017,3.9,2024,Line Manager
+SYN-EMP-2018,3.5,2024,HR Business Partner
+SYN-EMP-2019,3.4,2023,HR Business Partner
+SYN-EMP-2020,4.1,2023,HR Business Partner
+SYN-EMP-2021,3.1,2022,Line Manager
+SYN-EMP-2022,2.4,2023,Line Manager
+SYN-EMP-2023,3.9,2024,Line Manager
+SYN-EMP-2024,2.9,2022,HR Business Partner
+SYN-EMP-2025,3.7,2022,HR Business Partner
+SYN-EMP-2026,4.2,2023,Line Manager
+SYN-EMP-2027,3.0,2023,Line Manager
+SYN-EMP-2028,3.2,2022,Line Manager
+SYN-EMP-2029,2.7,2024,HR Business Partner
+SYN-EMP-2030,3.5,2024,Line Manager
+SYN-EMP-2031,3.1,2023,Line Manager
+SYN-EMP-2032,2.4,2022,Line Manager
+SYN-EMP-2033,3.4,2022,HR Business Partner
+SYN-EMP-2034,4.1,2022,Line Manager
+SYN-EMP-2035,2.8,2022,Line Manager
+SYN-EMP-2036,3.7,2023,Line Manager
+SYN-EMP-2037,3.1,2022,HR Business Partner
+SYN-EMP-2038,2.4,2024,Line Manager
+SYN-EMP-2039,4.4,2022,Line Manager
+SYN-EMP-2040,3.8,2022,Line Manager
+SYN-EMP-2041,3.6,2022,HR Business Partner
+SYN-EMP-2042,3.1,2022,HR Business Partner
+SYN-EMP-2043,2.4,2024,Line Manager
+SYN-EMP-2044,4.1,2022,Line Manager
+SYN-EMP-2045,3.1,2022,HR Business Partner
+SYN-EMP-2046,4.6,2022,HR Business Partner
+SYN-EMP-2047,3.1,2024,HR Business Partner
+SYN-EMP-2048,3.3,2023,HR Business Partner
+SYN-EMP-2049,3.4,2023,Line Manager
+SYN-EMP-2050,3.4,2024,HR Business Partner
+SYN-EMP-2051,3.8,2022,HR Business Partner
+SYN-EMP-2052,3.5,2024,HR Business Partner
+SYN-EMP-2053,3.6,2022,Line Manager
+SYN-EMP-2054,3.2,2024,Line Manager
+SYN-EMP-2055,4.4,2023,Line Manager
+SYN-EMP-2056,3.6,2023,Line Manager
+SYN-EMP-2057,3.3,2022,Line Manager
+SYN-EMP-2058,3.6,2024,Line Manager
+SYN-EMP-2059,3.0,2023,Line Manager
+SYN-EMP-2060,3.3,2024,HR Business Partner
+SYN-EMP-2061,3.7,2023,HR Business Partner
+SYN-EMP-2062,3.7,2023,HR Business Partner
+SYN-EMP-2063,4.6,2024,Line Manager
+SYN-EMP-2064,3.5,2022,Line Manager
+SYN-EMP-2065,3.8,2024,HR Business Partner
+SYN-EMP-2066,3.0,2024,Line Manager
+SYN-EMP-2067,4.3,2024,Line Manager
+SYN-EMP-2068,3.4,2023,Line Manager
+SYN-EMP-2069,4.8,2023,HR Business Partner
+SYN-EMP-2070,2.5,2024,HR Business Partner
+SYN-EMP-2071,4.4,2024,HR Business Partner
+SYN-EMP-2072,3.4,2022,Line Manager
+SYN-EMP-2073,3.4,2024,Line Manager
+SYN-EMP-2074,2.9,2023,HR Business Partner
+SYN-EMP-2075,3.9,2023,Line Manager
+SYN-EMP-2076,4.3,2022,Line Manager
+SYN-EMP-2077,2.8,2022,HR Business Partner
+SYN-EMP-2078,3.7,2024,Line Manager
+SYN-EMP-2079,3.1,2023,HR Business Partner
+SYN-EMP-2080,3.7,2023,Line Manager
+SYN-EMP-2081,3.7,2022,Line Manager
+SYN-EMP-2082,2.8,2023,Line Manager
+SYN-EMP-2083,2.5,2023,HR Business Partner
+SYN-EMP-2084,3.5,2024,HR Business Partner
+SYN-EMP-2085,4.0,2024,HR Business Partner
+SYN-EMP-2086,2.8,2022,Line Manager
+SYN-EMP-2087,3.5,2024,Line Manager
+SYN-EMP-2088,3.9,2022,Line Manager
+SYN-EMP-2089,3.2,2023,Line Manager
+SYN-EMP-2090,2.8,2024,HR Business Partner
+SYN-EMP-2091,3.3,2022,HR Business Partner
+SYN-EMP-2092,4.0,2022,Line Manager
+SYN-EMP-2093,3.5,2023,HR Business Partner
+SYN-EMP-2094,4.3,2022,Line Manager
+SYN-EMP-2095,2.8,2023,HR Business Partner
+SYN-EMP-2096,5.0,2023,Line Manager
+SYN-EMP-2097,3.7,2023,Line Manager
+SYN-EMP-2098,3.1,2022,HR Business Partner
+SYN-EMP-2099,4.4,2024,Line Manager
+SYN-EMP-2100,3.3,2024,Line Manager
+SYN-EMP-2101,3.1,2023,HR Business Partner
+SYN-EMP-2102,3.3,2023,HR Business Partner
+SYN-EMP-2103,2.0,2023,HR Business Partner
+SYN-EMP-2104,4.0,2024,HR Business Partner
+SYN-EMP-2105,3.4,2022,Line Manager
+SYN-EMP-2106,3.3,2024,Line Manager
+SYN-EMP-2107,2.9,2024,HR Business Partner
+SYN-EMP-2108,4.4,2022,HR Business Partner
+SYN-EMP-2109,3.5,2023,Line Manager
+SYN-EMP-2110,3.3,2023,Line Manager
+SYN-EMP-2111,4.0,2023,Line Manager
+SYN-EMP-2112,3.2,2024,Line Manager
+SYN-EMP-2113,3.2,2022,Line Manager
+SYN-EMP-2114,4.1,2022,Line Manager
+SYN-EMP-2115,4.0,2023,Line Manager
+SYN-EMP-2116,3.9,2023,Line Manager
+SYN-EMP-2117,3.9,2022,HR Business Partner
+SYN-EMP-2118,3.6,2024,HR Business Partner
+SYN-EMP-2119,3.0,2022,HR Business Partner
+SYN-EMP-2120,3.5,2022,HR Business Partner
+SYN-EMP-2121,4.6,2022,HR Business Partner
+SYN-EMP-2122,3.4,2023,HR Business Partner
+SYN-EMP-2123,4.2,2024,Line Manager
+SYN-EMP-2124,3.2,2022,HR Business Partner
+SYN-EMP-2125,3.7,2024,HR Business Partner
+SYN-EMP-2126,3.1,2024,HR Business Partner
+SYN-EMP-2127,3.7,2022,HR Business Partner
+SYN-EMP-2128,3.3,2024,HR Business Partner
+SYN-EMP-2129,2.5,2024,HR Business Partner
+SYN-EMP-2130,3.4,2024,Line Manager
+SYN-EMP-2131,4.1,2023,Line Manager
+SYN-EMP-2132,3.2,2023,Line Manager
+SYN-EMP-2133,3.3,2023,HR Business Partner
+SYN-EMP-2134,3.3,2024,HR Business Partner
+SYN-EMP-2135,3.3,2023,Line Manager
+SYN-EMP-2136,4.1,2022,HR Business Partner
+SYN-EMP-2137,3.7,2022,HR Business Partner
+SYN-EMP-2138,3.4,2023,Line Manager
+SYN-EMP-2139,2.9,2024,HR Business Partner
+SYN-EMP-2140,4.4,2023,HR Business Partner
+SYN-EMP-2141,3.5,2024,HR Business Partner
+SYN-EMP-2142,3.4,2023,Line Manager
+SYN-EMP-2143,2.8,2023,Line Manager
+SYN-EMP-2144,3.9,2024,HR Business Partner
+SYN-EMP-2145,3.7,2024,Line Manager
+SYN-EMP-2146,3.6,2023,HR Business Partner
+SYN-EMP-2147,2.6,2024,HR Business Partner
+SYN-EMP-2148,2.6,2024,HR Business Partner
+SYN-EMP-2149,3.4,2024,HR Business Partner

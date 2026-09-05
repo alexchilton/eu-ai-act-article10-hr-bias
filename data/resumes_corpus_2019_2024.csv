@@ -1,0 +1,201 @@
+candidate_id,name,skills,years_exp,applied_year
+SYN-1000,Jordan Garcia,Project Management; Java; Excel,14,2022
+SYN-1001,Chris Garcia,Machine Learning; Excel; Tableau,19,2022
+SYN-1002,Alex Chen,Tableau; Scala; Python,7,2020
+SYN-1003,Jordan Okafor,Scala; Tableau,16,2021
+SYN-1004,Taylor Chen,Excel; Scala,10,2023
+SYN-1005,Taylor Garcia,Python; Tableau; R,6,2023
+SYN-1006,Drew Patel,Tableau; Java; Python,14,2024
+SYN-1007,Jamie Kim,Tableau; Python; Scala,4,2020
+SYN-1008,Drew Chen,Tableau; Excel; R; Machine Learning,2,2021
+SYN-1009,Sam Johnson,Excel; Machine Learning,15,2024
+SYN-1010,Morgan Patel,Machine Learning; Excel; Java,19,2024
+SYN-1011,Alex Chen,R; Java,3,2020
+SYN-1012,Drew Kim,Machine Learning; Scala; Tableau,10,2023
+SYN-1013,Morgan Smith,Machine Learning; Tableau; Project Management; Java,14,2019
+SYN-1014,Alex Ali,Python; Machine Learning; Tableau; Scala,0,2023
+SYN-1015,Jordan Nguyen,SQL; Machine Learning; Tableau; Java,15,2022
+SYN-1016,Drew Johnson,Machine Learning; SQL,8,2023
+SYN-1017,Casey Garcia,Project Management; Machine Learning,10,2022
+SYN-1018,Taylor Patel,Project Management; Java,7,2022
+SYN-1019,Jordan Patel,SQL; Scala,1,2022
+SYN-1020,Riley Patel,Project Management; Scala; Java,17,2023
+SYN-1021,Quinn Brown,Project Management; R; Excel; Java,19,2024
+SYN-1022,Jamie Dubois,Project Management; R; Excel,5,2020
+SYN-1023,Quinn Okafor,Tableau; Project Management; Excel; R,15,2020
+SYN-1024,Sam Smith,Project Management; Excel,18,2024
+SYN-1025,Alex Fischer,SQL; R; Python; Scala,6,2022
+SYN-1026,Riley Smith,Project Management; SQL; Excel,1,2024
+SYN-1027,Avery Garcia,Java; Python; Scala; R,4,2023
+SYN-1028,Chris Okafor,Tableau; Project Management; Java,11,2019
+SYN-1029,Morgan Dubois,SQL; Python; Java,2,2021
+SYN-1030,Jordan Ali,Machine Learning; Project Management,13,2023
+SYN-1031,Riley Johnson,R; Scala,2,2024
+SYN-1032,Morgan Patel,R; SQL,1,2024
+SYN-1033,Sam Johnson,Python; Tableau,17,2024
+SYN-1034,Quinn Dubois,SQL; Tableau; Excel,18,2022
+SYN-1035,Jamie Dubois,Excel; Project Management,18,2019
+SYN-1036,Avery Fischer,R; Machine Learning; Tableau,18,2019
+SYN-1037,Quinn Chen,Python; Scala; SQL,4,2024
+SYN-1038,Casey Garcia,Excel; Python; Machine Learning,17,2021
+SYN-1039,Taylor Brown,Java; Python; R,1,2022
+SYN-1040,Alex Okafor,SQL; R,9,2024
+SYN-1041,Jordan Johnson,Scala; Python; Machine Learning; Excel,10,2019
+SYN-1042,Jamie Garcia,SQL; Project Management; Excel; Tableau,18,2019
+SYN-1043,Riley Johnson,Tableau; Excel,18,2024
+SYN-1044,Jamie Fischer,SQL; Java; Scala; Tableau,11,2023
+SYN-1045,Taylor Fischer,Java; SQL; Project Management,1,2021
+SYN-1046,Chris Okafor,R; Python; Tableau; Machine Learning,6,2024
+SYN-1047,Drew Brown,Project Management; Scala; Machine Learning; Java,9,2022
+SYN-1048,Jamie Dubois,Java; Machine Learning,17,2020
+SYN-1049,Jordan Garcia,Project Management; Python; Java; Excel,2,2019
+SYN-1050,Casey Johnson,Scala; Tableau; SQL; R,18,2019
+SYN-1051,Taylor Nguyen,R; Project Management; Java,14,2024
+SYN-1052,Jamie Nguyen,Python; Tableau,18,2023
+SYN-1053,Jamie Chen,SQL; Java; Python,6,2022
+SYN-1054,Riley Okafor,Machine Learning; Scala; SQL,6,2020
+SYN-1055,Taylor Garcia,Java; Project Management,4,2024
+SYN-1056,Morgan Ali,Scala; Python; Java; SQL,15,2024
+SYN-1057,Taylor Patel,Project Management; Python; Excel,5,2019
+SYN-1058,Alex Kim,Tableau; Java,2,2021
+SYN-1059,Morgan Okafor,Excel; Python,16,2024
+SYN-1060,Jamie Brown,Excel; Scala; SQL,10,2024
+SYN-1061,Riley Brown,Python; SQL,8,2022
+SYN-1062,Sam Okafor,SQL; Python; Tableau; Machine Learning,6,2020
+SYN-1063,Taylor Johnson,R; Python; Excel,15,2021
+SYN-1064,Casey Okafor,Scala; Excel; Project Management,13,2020
+SYN-1065,Drew Smith,Machine Learning; Scala; R,7,2021
+SYN-1066,Quinn Kim,Machine Learning; Excel; R,5,2019
+SYN-1067,Taylor Smith,Tableau; Scala; Machine Learning; Python,7,2024
+SYN-1068,Casey Brown,Java; Scala; R; Project Management,6,2021
+SYN-1069,Jamie Kim,Project Management; Scala; Excel,18,2021
+SYN-1070,Casey Johnson,SQL; Python,3,2021
+SYN-1071,Riley Okafor,Tableau; Java,11,2024
+SYN-1072,Riley Smith,Python; Project Management,13,2022
+SYN-1073,Riley Chen,SQL; Project Management; Machine Learning,0,2021
+SYN-1074,Riley Nguyen,Excel; Java,14,2019
+SYN-1075,Sam Dubois,SQL; R; Java,6,2022
+SYN-1076,Jordan Dubois,Python; SQL; Scala,0,2024
+SYN-1077,Drew Garcia,R; Project Management; Machine Learning; Excel,3,2023
+SYN-1078,Jordan Fischer,Excel; Java; Python,12,2019
+SYN-1079,Morgan Brown,Excel; Tableau; Java; Machine Learning,18,2023
+SYN-1080,Taylor Kim,SQL; Project Management; Tableau,6,2023
+SYN-1081,Jordan Brown,Java; R; SQL; Python,2,2023
+SYN-1082,Quinn Fischer,Machine Learning; Tableau,5,2021
+SYN-1083,Jordan Smith,Excel; Python; Project Management,0,2020
+SYN-1084,Jordan Chen,Java; Tableau; Machine Learning; Excel,12,2020
+SYN-1085,Drew Brown,Machine Learning; Python,12,2023
+SYN-1086,Jamie Nguyen,R; Project Management,7,2019
+SYN-1087,Avery Garcia,Python; SQL; Excel,11,2020
+SYN-1088,Drew Patel,SQL; Excel,17,2019
+SYN-1089,Casey Nguyen,R; SQL,3,2021
+SYN-1090,Morgan Chen,Excel; Scala; SQL; Java,5,2023
+SYN-1091,Drew Dubois,Python; SQL,19,2020
+SYN-1092,Alex Nguyen,Project Management; Excel; Tableau,14,2024
+SYN-1093,Casey Brown,Scala; Tableau; Excel; Java,18,2024
+SYN-1094,Riley Johnson,Java; Project Management,6,2023
+SYN-1095,Chris Fischer,Excel; Scala; Machine Learning; SQL,9,2024
+SYN-1096,Alex Dubois,Project Management; Java; Scala; Machine Learning,16,2022
+SYN-1097,Jordan Smith,Project Management; R,7,2021
+SYN-1098,Alex Nguyen,Excel; Scala,10,2023
+SYN-1099,Morgan Johnson,Project Management; Tableau; Java; Excel,3,2024
+SYN-1100,Jordan Kim,Machine Learning; Scala; Java; Tableau,19,2020
+SYN-1101,Chris Kim,Java; SQL; R,12,2022
+SYN-1102,Avery Kim,SQL; Project Management; Machine Learning; Java,16,2023
+SYN-1103,Casey Okafor,Excel; Scala; SQL; Machine Learning,6,2022
+SYN-1104,Chris Nguyen,Java; Excel; Scala; R,13,2022
+SYN-1105,Casey Garcia,Project Management; Tableau,15,2019
+SYN-1106,Sam Garcia,SQL; Python; Project Management,15,2024
+SYN-1107,Taylor Chen,Machine Learning; Python; Excel,2,2021
+SYN-1108,Chris Ali,SQL; Python; Project Management; Machine Learning,17,2023
+SYN-1109,Taylor Nguyen,Scala; Project Management; SQL,13,2023
+SYN-1110,Avery Fischer,R; Tableau,9,2021
+SYN-1111,Avery Fischer,Project Management; Java; Excel,18,2024
+SYN-1112,Sam Kim,Excel; Scala; SQL,0,2020
+SYN-1113,Casey Fischer,Tableau; Excel; Python,18,2019
+SYN-1114,Alex Ali,SQL; Java,1,2021
+SYN-1115,Riley Chen,Excel; Java; SQL; R,17,2023
+SYN-1116,Quinn Ali,Java; R; Project Management,1,2021
+SYN-1117,Jordan Nguyen,SQL; Excel; Machine Learning,0,2024
+SYN-1118,Sam Fischer,Scala; Excel,18,2024
+SYN-1119,Avery Dubois,Excel; Scala,0,2023
+SYN-1120,Riley Dubois,Machine Learning; SQL; Tableau; Scala,4,2021
+SYN-1121,Quinn Johnson,Machine Learning; Tableau; Python; Scala,17,2019
+SYN-1122,Avery Kim,Python; Scala,10,2019
+SYN-1123,Riley Dubois,R; Machine Learning,0,2022
+SYN-1124,Avery Fischer,Machine Learning; Python; Excel; Tableau,18,2023
+SYN-1125,Casey Brown,R; Java; Tableau; Scala,18,2020
+SYN-1126,Sam Smith,R; Project Management,0,2023
+SYN-1127,Sam Garcia,Machine Learning; R; Tableau; Scala,6,2022
+SYN-1128,Avery Patel,Excel; Tableau; Scala; Project Management,15,2023
+SYN-1129,Morgan Dubois,Scala; R; Machine Learning,5,2023
+SYN-1130,Casey Fischer,Machine Learning; Java,9,2021
+SYN-1131,Taylor Garcia,Java; Excel; Project Management; R,4,2020
+SYN-1132,Quinn Johnson,Java; SQL; Scala; Tableau,12,2022
+SYN-1133,Avery Smith,Tableau; R,8,2019
+SYN-1134,Alex Smith,Tableau; Python; Project Management; R,1,2020
+SYN-1135,Quinn Okafor,Tableau; R; SQL; Scala,17,2023
+SYN-1136,Morgan Patel,Scala; Tableau; Python; Machine Learning,5,2019
+SYN-1137,Morgan Ali,Excel; Tableau; Python; SQL,4,2023
+SYN-1138,Morgan Brown,Project Management; Scala,19,2019
+SYN-1139,Jordan Johnson,Machine Learning; Java; SQL,12,2019
+SYN-1140,Sam Johnson,Tableau; Project Management; Java,8,2024
+SYN-1141,Morgan Chen,Tableau; SQL,6,2021
+SYN-1142,Quinn Smith,SQL; Java; Excel; Python,16,2019
+SYN-1143,Morgan Ali,Excel; Python; Java; Tableau,18,2020
+SYN-1144,Morgan Brown,Tableau; Python; Scala; Excel,0,2020
+SYN-1145,Taylor Dubois,Project Management; Excel,16,2020
+SYN-1146,Alex Ali,Tableau; SQL; R,18,2019
+SYN-1147,Casey Smith,Project Management; Tableau,11,2021
+SYN-1148,Morgan Patel,Python; Scala; Tableau,1,2020
+SYN-1149,Drew Dubois,Excel; Tableau; Machine Learning; Python,5,2023
+SYN-1150,Riley Smith,Java; Python; Tableau,1,2024
+SYN-1151,Morgan Johnson,Excel; Java; Python,10,2024
+SYN-1152,Morgan Smith,Excel; R; Java,0,2023
+SYN-1153,Chris Dubois,SQL; Project Management,13,2023
+SYN-1154,Casey Garcia,Tableau; Scala; R,18,2023
+SYN-1155,Riley Patel,Java; Project Management; R; Machine Learning,1,2022
+SYN-1156,Chris Johnson,Scala; R; Tableau; SQL,2,2021
+SYN-1157,Quinn Kim,Machine Learning; SQL; Python,19,2021
+SYN-1158,Chris Kim,SQL; Project Management,17,2022
+SYN-1159,Alex Brown,Java; Python; Project Management,2,2023
+SYN-1160,Jamie Nguyen,Project Management; Tableau; Machine Learning; Excel,13,2022
+SYN-1161,Jamie Ali,Java; Excel; Python; Tableau,1,2024
+SYN-1162,Avery Kim,Machine Learning; Scala; Python; Excel,12,2020
+SYN-1163,Casey Brown,Excel; R; Project Management,16,2024
+SYN-1164,Taylor Patel,Machine Learning; Excel,15,2024
+SYN-1165,Casey Dubois,Project Management; Machine Learning,3,2022
+SYN-1166,Jamie Dubois,Excel; Java; SQL,12,2020
+SYN-1167,Avery Garcia,Excel; Java; Tableau; R,14,2019
+SYN-1168,Jordan Ali,R; Machine Learning,13,2020
+SYN-1169,Taylor Smith,Excel; Machine Learning,14,2020
+SYN-1170,Jordan Patel,Excel; Python,14,2023
+SYN-1171,Riley Ali,Machine Learning; R,13,2024
+SYN-1172,Taylor Brown,Machine Learning; Scala; Java,0,2020
+SYN-1173,Alex Chen,Java; Machine Learning; R; Tableau,13,2019
+SYN-1174,Quinn Garcia,Python; Java; Tableau,18,2024
+SYN-1175,Chris Garcia,Tableau; Python; Machine Learning; SQL,11,2020
+SYN-1176,Casey Fischer,Machine Learning; R,8,2024
+SYN-1177,Alex Smith,Scala; R,7,2023
+SYN-1178,Casey Fischer,Excel; Machine Learning; Project Management,5,2023
+SYN-1179,Taylor Kim,Python; R; SQL,8,2022
+SYN-1180,Casey Ali,Python; Excel; Project Management; R,17,2020
+SYN-1181,Jordan Dubois,Scala; SQL; Project Management; R,15,2020
+SYN-1182,Morgan Nguyen,Scala; R; Project Management,14,2022
+SYN-1183,Alex Okafor,Excel; Scala,7,2021
+SYN-1184,Drew Nguyen,Java; Project Management,18,2024
+SYN-1185,Avery Fischer,Java; Project Management; Excel; SQL,2,2022
+SYN-1186,Avery Dubois,Scala; Machine Learning,7,2021
+SYN-1187,Jordan Nguyen,R; Project Management,17,2024
+SYN-1188,Chris Nguyen,Project Management; Machine Learning; Python,17,2019
+SYN-1189,Jamie Fischer,R; Java,18,2021
+SYN-1190,Sam Okafor,SQL; Project Management; Python,18,2019
+SYN-1191,Taylor Nguyen,Machine Learning; Scala; Java,8,2019
+SYN-1192,Morgan Dubois,Python; Project Management,5,2021
+SYN-1193,Sam Patel,R; Project Management; Machine Learning; Tableau,6,2020
+SYN-1194,Drew Brown,Scala; Tableau; Excel; Project Management,9,2022
+SYN-1195,Avery Nguyen,Excel; Machine Learning; Tableau,16,2024
+SYN-1196,Sam Johnson,SQL; Project Management; R; Excel,1,2019
+SYN-1197,Alex Garcia,Excel; R,1,2024
+SYN-1198,Avery Garcia,SQL; R; Tableau,17,2021
+SYN-1199,Quinn Garcia,Machine Learning; Python; Project Management; Tableau,12,2020

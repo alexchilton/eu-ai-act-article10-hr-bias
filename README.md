@@ -71,9 +71,10 @@ before deployment.
 - Group sizes here are small. `Non-binary` and `60+` are 19 people each, `Other`
   is 29. A rate on 19 people is noise. That is a property of the demo, but it is
   also what a real HR dataset looks like for the groups that matter most.
-- The provenance records in Section 1 are illustrative. They name three CSVs
-  that do not exist, and `compute_hash()` hashes a short inline sample rather
-  than the named file.
+- The provenance records in Section 1 describe fictional sources. The files
+  exist and the SHA-256 hashes are of those files, but "Workday, tenant:
+  acme-corp" and the rest are invented. Replace them before the report means
+  anything.
 - The Article 10(5) justification is a drafting aid with a completeness check.
   It is not legal advice and it does not decide whether the exception applies.
 - Correcting a disparity in the data does not make the system compliant. It is
@@ -82,8 +83,14 @@ before deployment.
 ## Running it
 
 Open `eu_ai_act_article10_hr_compliance.ipynb`. Needs numpy, pandas and
-matplotlib. To point it at real data, replace `generate_synthetic_resumes()`
-with an ATS export, and read the limits above first.
+matplotlib, nothing else. Run all cells; every number in this README is
+reproduced exactly, because every generator is seeded.
+
+To point it at real data, replace `generate_synthetic_resumes()` with an ATS
+export and rewrite the Section 1 provenance records. Read the limits first.
+
+`data/` holds the three CSVs the Section 1 provenance records name, written by
+the notebook and hashed by it. They are synthetic: `SYN-` ids, invented names.
 
 Outputs already in the repo: `article10_compliance_report.html`,
 `article_10_5_justification.json`, and the two hire-rate charts.
