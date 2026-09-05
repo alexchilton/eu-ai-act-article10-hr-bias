@@ -15,34 +15,47 @@ Everything runs on synthetic data. No real candidates, no PII.
 | 4. Synthetic data | 10(3) | Generates PII-free test data with deliberately injected bias |
 | 5. Checklist | - | Rolls the five checks into a pass/warn/fail verdict |
 
-## Results as it stands
+## The point: validate the test, not just the data
 
-Bias detection on the sample dataset:
+Everything here is generated, so the true bias per group is known. That is the
+whole reason for synthetic data. On real data you can measure a disparity but
+you can never check whether your test was right, because nobody knows the
+answer.
+
+Run that check and the four-fifths rule does badly. Section 2 injects a known
+penalty into six groups and the test is scored against it:
 
 ```
-Overall hire rate: 37.8%
-FOUR-FIFTHS RULE VIOLATION  Woman       DIR = 0.78   33.5%
-FOUR-FIFTHS RULE VIOLATION  Non-binary  DIR = 0.74   31.6%
-FOUR-FIFTHS RULE VIOLATION  60+         DIR = 0.67   26.3%
-FOUR-FIFTHS RULE VIOLATION  Hispanic    DIR = 0.68   27.3%
+attribute  group        n    rate   DIR  flagged  injected  verdict
+gender     Non-binary   19  31.6%  0.74  YES        -0.12   true positive
+gender     Woman       242  33.5%  0.78  YES        -0.07   true positive
+age_group  60+          19  26.3%  0.67  YES        -0.15   true positive
+age_group  46-60       105  39.0%  1.00  no         -0.05   FALSE NEGATIVE
+ethnicity  Hispanic     55  27.3%  0.68  YES        -0.06   true positive
+ethnicity  Black        54  38.9%  0.97  no         -0.10   FALSE NEGATIVE
+ethnicity  Other        29  31.0%  0.78  YES        +0.00   FALSE POSITIVE
 
+12 groups: 4 true positive, 5 true negative, 2 FALSE NEGATIVE, 1 FALSE POSITIVE
+The four-fifths rule got 3 of 12 groups wrong at n=500.
+```
+
+Black took the second-largest penalty in the dataset, -0.10, and the test read
+DIR 0.97 and cleared it. `Other` had no penalty at all and got flagged, on 29
+people.
+
+Section 4 repeats the failure independently on a separate 400-row set: three
+injected biases all recovered, plus `Group_D` flagged at DIR 0.78 with nothing
+injected.
+
+So the headline is not "here is how to run a bias test". It is that a
+compliance test you have not validated can clear a group that really was
+discriminated against, and the report will look clean.
+
+## Other results
+
+```
 Overall hire rate  original 37.8%  ->  corrected 32.0%
 ```
-
-Section 4 checks the detector rather than trusting it. Known bias goes into the
-synthetic data, and the test has to find it:
-
-```
-Injected   gender:Woman -0.12, ethnicity:Group_C -0.15, age_group:Over 50 -0.10
-
-DETECTED    Woman     DIR = 0.66
-DETECTED    Group_C   DIR = 0.45
-DETECTED    Over 50   DIR = 0.68
-UNEXPECTED  Group_D   DIR = 0.78   not injected
-```
-
-Three of three recovered, and one false positive that the notebook reports
-rather than hides.
 
 Final checklist: **2 PASS, 2 WARN, 1 FAIL**. One failure has to be resolved
 before deployment.
@@ -53,7 +66,14 @@ before deployment.
   nothing about any real hiring process.
 - The four-fifths rule is a US EEOC convention. It is a useful screen under
   Article 10(2)(f) but it is not what the AI Act specifies, and it is not a
-  legal test on its own.
+  legal test on its own. As the results above show, at these group sizes it
+  also misses real bias.
+- Group sizes here are small. `Non-binary` and `60+` are 19 people each, `Other`
+  is 29. A rate on 19 people is noise. That is a property of the demo, but it is
+  also what a real HR dataset looks like for the groups that matter most.
+- The provenance records in Section 1 are illustrative. They name three CSVs
+  that do not exist, and `compute_hash()` hashes a short inline sample rather
+  than the named file.
 - The Article 10(5) justification is a drafting aid with a completeness check.
   It is not legal advice and it does not decide whether the exception applies.
 - Correcting a disparity in the data does not make the system compliant. It is
