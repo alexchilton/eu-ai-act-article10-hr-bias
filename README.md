@@ -53,7 +53,7 @@ discriminated against, and the report will look clean.
 
 ## notebooks/
 
-Six notebooks that test the standard bias-mitigation moves rather than
+Seven notebooks that test the standard bias-mitigation moves rather than
 describing them. Each one states a claim, runs it, and reports what happened.
 All outputs are committed, so they read without being run.
 
@@ -65,9 +65,14 @@ All outputs are committed, so they read without being run.
 | **04** lipstick on a pig | Projecting out the gender direction debiases embeddings | Projection falls to **0.0000**, and an SVM still recovers gender at **98.2%**. The metric was removed, not the bias |
 | **05** linear vs adversarial | Proxies can be removed | Linear probe goes to chance three different ways while a tree probe stays at **0.82**. INLP gets it to 0.67, not to chance |
 | **06** COMPAS | The recidivism fight had a right answer | Calibrated for both races **and** false positive rate 42.3% vs 22.0%. Both sides correct. Equalising one breaks the others |
+| **07** the same test on real data | Notebook 1's result depends on a generator I wrote | UCI Adult: adversary at **0.938**, still **0.644** after removing six features. German Credit: sex is a substring inside `personal_status`, adversary **0.688** |
 
-Notebook 4 needs GloVe 300d, which `gensim` downloads on first run (376 MB).
-Notebook 6 uses the real ProPublica file in `data/`. The rest are self-contained.
+Notebooks 1, 2, 3 and 5 use synthetic data, because they need ground truth: you
+cannot score a bias test against the bias that was injected unless you injected
+it. Notebooks 4, 6 and 7 use real data - GloVe 300d, the ProPublica COMPAS file,
+and UCI Adult plus German Credit - so the results do not rest on a generator I
+wrote. Notebook 7 exists specifically to re-run notebook 1's test on data I did
+not construct, and the effect is larger there.
 
 The sources are in `papers/`, 13 open-access PDFs with a README mapping each
 claim to the paper behind it.
