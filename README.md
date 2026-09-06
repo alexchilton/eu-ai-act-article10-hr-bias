@@ -3,7 +3,9 @@
 A worked notebook on what Article 10 actually asks of an HR system, and how to
 test for it. HR screening is Annex III high risk, so Article 10 applies in full.
 
-Everything runs on synthetic data. No real candidates, no PII.
+The Article 10 notebook at the repo root runs entirely on synthetic data - no
+real candidates, no PII. The seven notebooks in `notebooks/` are a separate
+strand and several of them use real public benchmarks; see that section.
 
 ## What it covers
 
@@ -65,12 +67,12 @@ All outputs are committed, so they read without being run.
 | **04** lipstick on a pig | Projecting out the gender direction debiases embeddings | Projection falls to **0.0000**, and an SVM still recovers gender at **98.2%**. The metric was removed, not the bias |
 | **05** linear vs adversarial | Proxies can be removed | Linear probe goes to chance three different ways while a tree probe stays at **0.82**. INLP gets it to 0.67, not to chance |
 | **06** COMPAS | The recidivism fight had a right answer | Calibrated for both races **and** false positive rate 42.3% vs 22.0%. Both sides correct. Equalising one breaks the others |
-| **07** the same test on real data | Notebook 1's result depends on a generator I wrote | UCI Adult: adversary at **0.938**, still **0.644** after removing six features. German Credit: sex is a substring inside `personal_status`, adversary **0.688** |
+| **07** the same test on real data | Notebook 1's result depends on a generator I wrote | UCI Adult: **0.938**, still **0.644** after six removals. German Credit: sex hides inside `personal_status`, **0.688**. LSAC: **LSAT score alone recovers race at 0.716** |
 
 Notebooks 1, 2, 3 and 5 use synthetic data, because they need ground truth: you
 cannot score a bias test against the bias that was injected unless you injected
 it. Notebooks 4, 6 and 7 use real data - GloVe 300d, the ProPublica COMPAS file,
-and UCI Adult plus German Credit - so the results do not rest on a generator I
+and UCI Adult, German Credit and LSAC law school admissions - so the results do not rest on a generator I
 wrote. Notebook 7 exists specifically to re-run notebook 1's test on data I did
 not construct, and the effect is larger there.
 
@@ -88,8 +90,9 @@ before deployment.
 
 ## Limits
 
-- Synthetic data throughout. The numbers demonstrate the method, they say
-  nothing about any real hiring process.
+- The root notebook uses synthetic data throughout. Its numbers demonstrate the
+  method and say nothing about any real hiring process. `notebooks/` is mixed;
+  each one states which it uses.
 - The four-fifths rule is a US EEOC convention. It is a useful screen under
   Article 10(2)(f) but it is not what the AI Act specifies, and it is not a
   legal test on its own. As the results above show, at these group sizes it
