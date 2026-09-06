@@ -53,6 +53,9 @@ Linked rather than downloaded. Each is named where it is used.
 - **Ding, Hardt, Miller & Schmidt (2021), _Retiring Adult: New Datasets for Fair
   Machine Learning_ (NeurIPS).** Why UCI Adult is a poor benchmark and what to
   use instead. Noted in notebook 7. <https://arxiv.org/abs/2108.04884>
+- **Agarwal, Beygelzimer, Dudik, Langford & Wallach (2018), _A Reductions
+  Approach to Fair Classification_ (ICML).** The `ExponentiatedGradient` method
+  notebook 8 uses for in-training constraints. <https://arxiv.org/abs/1803.02453>
 - **Bertrand & Mullainathan (2004), _Are Emily and Greg More Employable than
   Lakisha and Jamal?_, AER.** The resume audit design. Referenced as the
   experiment the root notebook does not run.
@@ -61,4 +64,10 @@ Linked rather than downloaded. Each is named where it is used.
 
 `../data/compas-scores-two-years.csv` is the ProPublica COMPAS release, from
 <https://github.com/propublica/compas-analysis>. 7,214 rows. Used in notebook 6.
-Everything else under `../data/` is synthetic.
+
+`../data/acs/` is the folktables cache: the 2018 one-year ACS person file for
+California, 378,817 rows, downloaded on first run by notebook 7. It is US Census
+public-use microdata, already de-identified at source.
+
+UCI Adult, German Credit and LSAC are fetched from OpenML at run time and not
+stored in the repo. Everything else under `../data/` is synthetic.

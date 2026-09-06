@@ -93,7 +93,7 @@ discriminated against, and the report will look clean.
 
 ## notebooks/
 
-Seven notebooks that test the standard bias-mitigation moves rather than
+Eight notebooks that test the standard bias-mitigation moves rather than
 describing them. Each one states a claim, runs it, and reports what happened.
 All outputs are committed, so they read without being run.
 
@@ -105,7 +105,8 @@ All outputs are committed, so they read without being run.
 | **04** lipstick on a pig | Projecting out the gender direction debiases embeddings | Projection falls to **0.0000**. On Gonen & Goldberg's own protocol an SVM still recovers gender at **93.2%**, above their 88.88%. On words of *middling* association it gets **58.2%**, so the residue is concentrated in the extremes |
 | **05** linear vs adversarial | Proxies can be removed | Linear probe hits chance three ways; tree probe stays at **0.98**. With the paper's stopping rule INLP needs **one** projection on 8 seeds of 8, leaves rank 11 of 12, and changes nothing. A linear probe on squared terms gets **0.83**, so "no direction to remove" is basis-dependent |
 | **06** COMPAS | The recidivism fight had a right answer | Calibrated for both races **and** false positive rate 42.3% vs 22.0%. Both sides correct. Equalising one breaks the others, drawn as two group ROC curves with each rule marked on them |
-| **07** the same test on real data | Notebook 1's result depends on a generator I wrote | UCI Adult: **0.938**, still **0.644** after six removals. German Credit: sex hides inside `personal_status`, **0.699 ± 0.036**. LSAC: **LSAT score alone recovers race at 0.716**. And an income model never shown `sex` is calibrated within both sexes at base rates of 31% and 12% - the same fact, from the other side |
+| **07** the same test on real data | Notebook 1's result depends on a generator I wrote | UCI Adult: **0.938**, still **0.644** after six removals. **ACSIncome** (the dataset that replaced Adult): 0.814 down to **0.534**, so the effect is real but smaller on modern data. German Credit: sex hides inside `personal_status`, **0.699 ± 0.036**. LSAC: **LSAT alone recovers race at 0.716**. And an income model never shown `sex` is calibrated within both sexes at base rates of 31% and 12% |
+| **08** constrained learning | Pick a criterion, hand it to a library, done | On Adult with `fairlearn`: accuracy moves **at most 0.023**. Enforcing demographic parity takes the selection ratio 0.33 to **0.99** and the PPV gap 0.007 to **0.289**. Enforcing equalised odds closes both error gaps to **≤0.017** and leaves the selection ratio at **0.52**, still a four-fifths failure |
 
 ![Debiasing word embeddings](figures/04_lipstick.png)
 
@@ -128,14 +129,34 @@ not construct, and the effect is larger there.
 
 The three mitigation families are all represented rather than described:
 **pre-processing** (drop columns in 01 and 07, project in 04 and 05, reweigh in
-02), **in-training** (a parity penalty in 02), and **post-processing**
-(per-group thresholds in 02, 03, 06 and the root notebook).
+02), **in-training** (a parity penalty in 02, `fairlearn`'s
+`ExponentiatedGradient` in 08), and **post-processing** (per-group thresholds in
+02, 03, 06, 08 and the root notebook). Notebook 8 runs the last two head to head
+on the same split and prices them.
+
+![Constrained learning on Adult](figures/08_constraints.png)
+
+*Notebook 8. Five arms, one held-out split. The accuracy column barely moves. The
+selection ratio and the three error gaps move a great deal, and never in the same
+direction.*
 
 The sources are in `papers/`, 13 open-access PDFs with a README mapping each
 claim to the paper behind it. Barocas, Hardt & Narayanan's textbook is among
 them; Chapter 3 is the one these notebooks are a companion to.
 
 ## Other results
+
+Two experiments in Section 2 are not rate comparisons at all.
+
+A **name-flip audit** - the Bertrand & Mullainathan design, run against the model
+rather than against employers. Same CV, one field changed. Women given a male
+first name move from **0.339 to 0.403** mean score, against a same-pool placebo
+shift of +0.005. The screener was never given gender.
+
+A **six-round feedback loop** in notebook 2, where each round only observes the
+outcomes of the applicants it accepted. The selection ratio drifts **0.71 to
+0.62** while the audit AUC *improves* **0.623 to 0.665**. The metric an ML team
+watches goes up in every round in which the disparity gets worse.
 
 Mitigation under 10(2)(g) is post-processing with per-group thresholds:
 
@@ -184,11 +205,16 @@ not.
   It is not legal advice and it does not decide whether the exception applies.
 - Correcting a disparity in the data does not make the system compliant. It is
   one of several obligations.
+- The name-flip audit in Section 2 is run against a model fitted on 500 rows.
+  Its placebo arm flips 106 of 500 decisions on its own, so read the group means
+  and not the flip counts. The gender effect clears that floor (+0.064 against
+  +0.005); the surname effect does not (+0.008) and is not reported as one.
 
 ## Running it
 
 Open `eu_ai_act_article10_hr_compliance.ipynb`. Needs numpy, pandas and
-matplotlib and scikit-learn. Run all cells; every number in this README is
+matplotlib and scikit-learn. The notebooks in `notebooks/` additionally use
+gensim (04), fairlearn (08) and folktables (07); everything else is stdlib. Run all cells; every number in this README is
 reproduced exactly, because every generator is seeded.
 
 To point it at real data, replace `generate_synthetic_resumes()` with an ATS

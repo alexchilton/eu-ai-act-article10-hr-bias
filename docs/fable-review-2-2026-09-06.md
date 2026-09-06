@@ -4,12 +4,13 @@ Second adversarial pass, after commits 0884de1, 3a3b0d0, ab8d7fa, 1c7c7c2.
 Method: every notebook re-run from its own source with the kernel's interpreter (`/usr/local/bin/python3.12`, sklearn 1.7.1, numpy 2.3.1, pandas 2.3.1, gensim 4.4.0), then attacked with more seeds, held-out splits, and the papers' own protocols.
 Nothing in the repo was edited by the reviewer.
 
-**Status: all of Section A is closed, and Section B items 1, 4, 5, 6, 7 and 9
-are done.** A1-A4 in commit `733a321`; A5-A8 and the improvements in the commit
-that follows it. Not done: fairlearn's `ExponentiatedGradient` (a parity penalty
-implemented directly was used instead, so no new dependency) and re-running
-notebook 7 on ACSIncome (needs `folktables`). The items the review itself
-recommends against are not done, by agreement with it.
+**Status: Sections A and B are closed in full, and the Section C gaps the review
+called practitioner-relevant are closed too.** A1-A4 in commit `733a321`; A5-A8
+and B1/B4/B6/B7/B9 in `7a6fcfc`; B5 (`fairlearn`, a new notebook 8), B8 (the
+name-flip audit), B10 (ACSIncome) and C-gaps 1, 2, 5, 6, 7 and 8 in the commit
+after that. The four items the review recommends against are not done, by
+agreement with it. C11 (causality) is left undone for the reason the review
+gives: without a defensible graph there is nothing to run.
 
 Skipped: a per-column adversary for notebook 1 (the script crashed on sparse one-hot output; not needed for any finding).
 
