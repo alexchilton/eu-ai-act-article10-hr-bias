@@ -13,7 +13,7 @@ strand and several of them use real public benchmarks; see that section.
 |---|---|---|
 | 1. Data provenance | 10(2)(a) | Records where the data came from and how it was governed |
 | 2. Demographic parity | 10(2)(f), 10(3) | Hire rates per group, disparate impact ratio, four-fifths rule |
-| 3. Special category data | 10(5) | Drafts and completeness-checks the narrow 10(5) justification |
+| 3. Special category data | Art 4a | Drafts and completeness-checks the Article 4a justification |
 | 4. Synthetic data | 10(3) | Generates PII-free test data with deliberately injected bias |
 | 5. Checklist | - | Rolls the five checks into a pass/warn/fail verdict |
 
@@ -50,6 +50,39 @@ flagged despite population DIRs of 0.83, 0.84 and 1.00. At n=500 the rule
 produces three false alarms and misses the one group that was genuinely
 discriminated against.
 
+### It is worse than four wrong answers
+
+Put a bootstrap interval on each ratio and **not one of the twelve groups can be
+classified**. Every interval crosses 0.80:
+
+```
+gender     Non-binary     19   0.74   [0.26, 1.00]   CANNOT TELL
+ethnicity  Black          54   0.97   [0.58, 1.00]   CANNOT TELL
+ethnicity  Hispanic       55   0.68   [0.35, 0.95]   CANNOT TELL
+```
+
+So the rule did not get four of twelve wrong. It never had the information to get
+any of them right, and the verdict it printed was a coin toss with a decimal
+point. Simulate the rule directly and the size it needs is visible:
+
+```
+ n per group    detects DIR 0.74    false alarm at DIR 1.00
+          20                 55%                        27%
+         100                 66%                        10%
+         500                 81%                         0%
+```
+
+Roughly **500 per group** before a real 0.74 disparity is detected more often
+than not, and the false-alarm rate only falls below 5% somewhere past 200. Most
+HR datasets do not have 500 people in the groups that matter.
+
+Two more checks in the same section. The conditional DIR for `Woman` runs from
+**0.51** among high-school candidates to **0.84** among bachelor's - one stratum
+fails badly, another passes comfortably, mostly from splitting 500 people four
+ways. And the intersectional table has **15 cells, one empty and four with fewer
+than ten candidates**, which is the real answer to "why does nobody test
+intersections".
+
 Section 4 repeats the failure independently on a separate 400-row set: three
 injected biases all recovered, plus `Group_D` flagged at DIR 0.78 with nothing
 injected.
@@ -67,12 +100,12 @@ All outputs are committed, so they read without being run.
 | | Claim under test | Result |
 |---|---|---|
 | **01** proxy detection | Dropping the protected attribute and its proxies makes a model blind to it | Adversary recovers gender at **0.888**. Stripping postcode and school - real proxies here - takes it to **0.830**, not to chance. Six of eight features gone before it reaches 0.589 |
-| **02** label choice | Bias-aware training fixes prejudiced historical labels | Held out, 12 seeds: DIR **0.35 vs 0.72**, unanimous, accuracy gap only **0.012**. But reweighing the *wrong* label reaches the same point (0.73 at AUC 0.647), so the honest claim is narrower: label choice is the only move that needs **no access to the protected attribute** |
+| **02** label choice | Bias-aware training fixes prejudiced historical labels | Held out, 12 seeds: DIR **0.35 vs 0.72**, unanimous, accuracy gap only **0.012**. But reweighing the *wrong* label reaches the same point (0.73 at 0.647) and an in-training parity penalty beats it (**0.668 at 0.87**, ceiling 0.672), so the honest claim is narrower: label choice is the only move needing **no access to the protected attribute**. All three mitigation families in one table |
 | **03** impossibility | A pipeline can output "compliant" data | Group-blind and calibrated fails four-fifths at **0.68**. Forcing parity to 1.00 opens a **0.099 PPV gap** and needs different thresholds per group |
-| **04** lipstick on a pig | Projecting out the gender direction debiases embeddings | Projection falls to **0.0000**, and an SVM still recovers gender at **98.2%**. The metric was removed, not the bias |
+| **04** lipstick on a pig | Projecting out the gender direction debiases embeddings | Projection falls to **0.0000**. On Gonen & Goldberg's own protocol an SVM still recovers gender at **93.2%**, above their 88.88%. On words of *middling* association it gets **58.2%**, so the residue is concentrated in the extremes |
 | **05** linear vs adversarial | Proxies can be removed | Linear probe hits chance three ways; tree probe stays at **0.98**. With the paper's stopping rule INLP needs **one** projection on 8 seeds of 8, leaves rank 11 of 12, and changes nothing. A linear probe on squared terms gets **0.83**, so "no direction to remove" is basis-dependent |
-| **06** COMPAS | The recidivism fight had a right answer | Calibrated for both races **and** false positive rate 42.3% vs 22.0%. Both sides correct. Equalising one breaks the others |
-| **07** the same test on real data | Notebook 1's result depends on a generator I wrote | UCI Adult: **0.938**, still **0.644** after six removals. German Credit: sex hides inside `personal_status`, **0.699 ± 0.036**. LSAC: **LSAT score alone recovers race at 0.716** |
+| **06** COMPAS | The recidivism fight had a right answer | Calibrated for both races **and** false positive rate 42.3% vs 22.0%. Both sides correct. Equalising one breaks the others, drawn as two group ROC curves with each rule marked on them |
+| **07** the same test on real data | Notebook 1's result depends on a generator I wrote | UCI Adult: **0.938**, still **0.644** after six removals. German Credit: sex hides inside `personal_status`, **0.699 ± 0.036**. LSAC: **LSAT score alone recovers race at 0.716**. And an income model never shown `sex` is calibrated within both sexes at base rates of 31% and 12% - the same fact, from the other side |
 
 ![Debiasing word embeddings](figures/04_lipstick.png)
 
@@ -93,8 +126,14 @@ and UCI Adult, German Credit and LSAC law school admissions - so the results do 
 wrote. Notebook 7 exists specifically to re-run notebook 1's test on data I did
 not construct, and the effect is larger there.
 
+The three mitigation families are all represented rather than described:
+**pre-processing** (drop columns in 01 and 07, project in 04 and 05, reweigh in
+02), **in-training** (a parity penalty in 02), and **post-processing**
+(per-group thresholds in 02, 03, 06 and the root notebook).
+
 The sources are in `papers/`, 13 open-access PDFs with a README mapping each
-claim to the paper behind it.
+claim to the paper behind it. Barocas, Hardt & Narayanan's textbook is among
+them; Chapter 3 is the one these notebooks are a companion to.
 
 ## Other results
 
@@ -133,13 +172,15 @@ not.
   legal test on its own. As the results above show, at these group sizes it
   also misses real bias.
 - Group sizes here are small. `Non-binary` and `60+` are 19 people each, `Other`
-  is 29. A rate on 19 people is noise. That is a property of the demo, but it is
-  also what a real HR dataset looks like for the groups that matter most.
+  is 29. A rate on 19 people is noise, and the bootstrap intervals above put a
+  number on how much: [0.26, 1.00] for `Non-binary`. That is a property of the
+  demo, but it is also what a real HR dataset looks like for the groups that
+  matter most, and the power table says what size would be enough.
 - The provenance records in Section 1 describe fictional sources. The files
   exist and the SHA-256 hashes are of those files, but "Workday, tenant:
   acme-corp" and the rest are invented. Replace them before the report means
   anything.
-- The Article 10(5) justification is a drafting aid with a completeness check.
+- The Article 4a justification is a drafting aid with a completeness check.
   It is not legal advice and it does not decide whether the exception applies.
 - Correcting a disparity in the data does not make the system compliant. It is
   one of several obligations.

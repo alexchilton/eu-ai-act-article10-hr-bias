@@ -34,6 +34,29 @@ notebook that uses it.
   Labels Problem_, KDD.** You only observe the outcome for applicants somebody
   approved. Also notebook 2.
 
+## Cited in the notebooks, not bundled
+
+Linked rather than downloaded. Each is named where it is used.
+
+- **Ravfogel, Elazar, Gonen, Twiton & Goldberg (2020), _Null It Out: Guarding
+  Protected Attributes by Iterative Nullspace Projection_ (ACL).** INLP.
+  Notebook 5 uses their stopping rule - project until the probe reaches chance -
+  and an earlier version of that notebook got a different answer by using a
+  coefficient-norm rule instead. <https://arxiv.org/abs/2004.07667>
+- **Kamiran & Calders (2012), _Data preprocessing techniques for classification
+  without discrimination_, KAIS.** Reweighing. Notebook 2 implements it in five
+  lines: weight each (group, label) cell by `P(group)P(label) / P(group, label)`.
+- **Liu, Simchowitz & Hardt (2019), _The Implicit Fairness Criterion of
+  Unconstrained Learning_ (ICML).** Why calibration by group falls out of a model
+  that predicts the outcome well. Notebook 7 measures it on Adult.
+  <https://arxiv.org/abs/1808.10013>
+- **Ding, Hardt, Miller & Schmidt (2021), _Retiring Adult: New Datasets for Fair
+  Machine Learning_ (NeurIPS).** Why UCI Adult is a poor benchmark and what to
+  use instead. Noted in notebook 7. <https://arxiv.org/abs/2108.04884>
+- **Bertrand & Mullainathan (2004), _Are Emily and Greg More Employable than
+  Lakisha and Jamal?_, AER.** The resume audit design. Referenced as the
+  experiment the root notebook does not run.
+
 ## Data
 
 `../data/compas-scores-two-years.csv` is the ProPublica COMPAS release, from
