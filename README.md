@@ -67,10 +67,10 @@ All outputs are committed, so they read without being run.
 | | Claim under test | Result |
 |---|---|---|
 | **01** proxy detection | Dropping the protected attribute and its proxies makes a model blind to it | Adversary recovers gender at **0.888**. Stripping postcode and school - real proxies here - takes it to **0.830**, not to chance. Six of eight features gone before it reaches 0.589 |
-| **02** label choice | Bias-aware training fixes prejudiced historical labels | Held out, 12 seeds: DIR **0.35 vs 0.72**, unanimous. Accuracy gap only **0.012**, and the human-decision label is **indistinguishable** from the realistic repayment model. The effect is on fairness, not accuracy |
+| **02** label choice | Bias-aware training fixes prejudiced historical labels | Held out, 12 seeds: DIR **0.35 vs 0.72**, unanimous, accuracy gap only **0.012**. But reweighing the *wrong* label reaches the same point (0.73 at AUC 0.647), so the honest claim is narrower: label choice is the only move that needs **no access to the protected attribute** |
 | **03** impossibility | A pipeline can output "compliant" data | Group-blind and calibrated fails four-fifths at **0.68**. Forcing parity to 1.00 opens a **0.099 PPV gap** and needs different thresholds per group |
 | **04** lipstick on a pig | Projecting out the gender direction debiases embeddings | Projection falls to **0.0000**, and an SVM still recovers gender at **98.2%**. The metric was removed, not the bias |
-| **05** linear vs adversarial | Proxies can be removed | Linear probe hits chance three ways; tree probe stays at **0.98**. INLP leaves rank 8 of 12 and barely dents it. A linear probe on squared terms gets **0.83**, so "no direction to remove" is basis-dependent |
+| **05** linear vs adversarial | Proxies can be removed | Linear probe hits chance three ways; tree probe stays at **0.98**. With the paper's stopping rule INLP needs **one** projection on 8 seeds of 8, leaves rank 11 of 12, and changes nothing. A linear probe on squared terms gets **0.83**, so "no direction to remove" is basis-dependent |
 | **06** COMPAS | The recidivism fight had a right answer | Calibrated for both races **and** false positive rate 42.3% vs 22.0%. Both sides correct. Equalising one breaks the others |
 | **07** the same test on real data | Notebook 1's result depends on a generator I wrote | UCI Adult: **0.938**, still **0.644** after six removals. German Credit: sex hides inside `personal_status`, **0.699 ± 0.036**. LSAC: **LSAT score alone recovers race at 0.716** |
 
@@ -111,8 +111,17 @@ rejected candidate p=0. It could only un-hire people, so it reached parity by
 levelling down and dropped the overall rate to 32.0%. That is kept in the
 notebook as a documented failure rather than deleted.
 
-Final checklist: **2 PASS, 2 WARN, 1 FAIL**. One failure has to be resolved
-before deployment.
+The thresholds are set on **gender only**, so the corrected rule cannot see age
+or ethnicity and their population rates are equal by construction. The checklist
+still reports `B1 FAIL` - on `age_group:18-30` at DIR **0.7997**, four
+ten-thousandths under the line - and over 200 seeds it fails **97.5%** of the
+time, flagging an ethnicity group in **85.5%** and `Black` in **37%**. Every one
+of those is noise from group sizes of 19 to 54.
+
+Final checklist: **2 PASS, 2 WARN, 1 FAIL**, and the FAIL is not a finding. That
+is the second half of the same lesson: in Section 2 the rule cleared a group that
+really was discriminated against, and here it condemns groups that provably were
+not.
 
 ## Limits
 
@@ -138,7 +147,7 @@ before deployment.
 ## Running it
 
 Open `eu_ai_act_article10_hr_compliance.ipynb`. Needs numpy, pandas and
-matplotlib, nothing else. Run all cells; every number in this README is
+matplotlib and scikit-learn. Run all cells; every number in this README is
 reproduced exactly, because every generator is seeded.
 
 To point it at real data, replace `generate_synthetic_resumes()` with an ATS
