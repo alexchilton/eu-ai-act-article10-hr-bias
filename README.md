@@ -24,26 +24,31 @@ whole reason for synthetic data. On real data you can measure a disparity but
 you can never check whether your test was right, because nobody knows the
 answer.
 
-Run that check and the four-fifths rule does badly. Section 2 injects a known
-penalty into six groups and the test is scored against it:
+Run that check and the four-fifths rule does badly. The comparison has to be made
+carefully: "a penalty was injected" is not the same as "the rule should have
+flagged it", since a small penalty does not put a group under 0.80. `DIR pop` is
+the ratio the generator implies in the population, measured at 400,000 rows. A
+group is a genuine miss only if its population DIR is below 0.80.
 
 ```
-attribute  group        n    rate   DIR  flagged  injected  verdict
-gender     Non-binary   19  31.6%  0.74  YES        -0.12   true positive
-gender     Woman       242  33.5%  0.78  YES        -0.07   true positive
-age_group  60+          19  26.3%  0.67  YES        -0.15   true positive
-age_group  46-60       105  39.0%  1.00  no         -0.05   FALSE NEGATIVE
-ethnicity  Hispanic     55  27.3%  0.68  YES        -0.06   true positive
-ethnicity  Black        54  38.9%  0.97  no         -0.10   FALSE NEGATIVE
-ethnicity  Other        29  31.0%  0.78  YES        +0.00   FALSE POSITIVE
+attribute  group           n   rate  DIR obs  DIR pop  flagged verdict
+gender     Non-binary     19  31.6%     0.74     0.71  YES     true positive
+gender     Woman         242  33.5%     0.78     0.83  YES     FALSE POSITIVE
+age_group  46-60         105  39.0%     1.00     0.87  no      true negative
+age_group  60+            19  26.3%     0.67     0.61  YES     true positive
+ethnicity  Black          54  38.9%     0.97     0.74  no      FALSE NEGATIVE
+ethnicity  Hispanic       55  27.3%     0.68     0.84  YES     FALSE POSITIVE
+ethnicity  Other          29  31.0%     0.78     1.00  YES     FALSE POSITIVE
 
-12 groups: 4 true positive, 5 true negative, 2 FALSE NEGATIVE, 1 FALSE POSITIVE
-The four-fifths rule got 3 of 12 groups wrong at n=500.
+12 groups: 2 true positive, 6 true negative, 1 FALSE NEGATIVE, 3 FALSE POSITIVE
+The four-fifths rule got 4 of 12 groups wrong at n=500.
 ```
 
-Black took the second-largest penalty in the dataset, -0.10, and the test read
-DIR 0.97 and cleared it. `Other` had no penalty at all and got flagged, on 29
-people.
+**Black is the only real violation in the file** - population DIR 0.74 - and the
+test read 0.97 and cleared it. Meanwhile Woman, Hispanic and `Other` were all
+flagged despite population DIRs of 0.83, 0.84 and 1.00. At n=500 the rule
+produces three false alarms and misses the one group that was genuinely
+discriminated against.
 
 Section 4 repeats the failure independently on a separate 400-row set: three
 injected biases all recovered, plus `Group_D` flagged at DIR 0.78 with nothing
@@ -67,7 +72,7 @@ All outputs are committed, so they read without being run.
 | **04** lipstick on a pig | Projecting out the gender direction debiases embeddings | Projection falls to **0.0000**, and an SVM still recovers gender at **98.2%**. The metric was removed, not the bias |
 | **05** linear vs adversarial | Proxies can be removed | Linear probe hits chance three ways; tree probe stays at **0.98**. INLP leaves rank 8 of 12 and barely dents it. A linear probe on squared terms gets **0.83**, so "no direction to remove" is basis-dependent |
 | **06** COMPAS | The recidivism fight had a right answer | Calibrated for both races **and** false positive rate 42.3% vs 22.0%. Both sides correct. Equalising one breaks the others |
-| **07** the same test on real data | Notebook 1's result depends on a generator I wrote | UCI Adult: **0.938**, still **0.644** after six removals. German Credit: sex hides inside `personal_status`, **0.688**. LSAC: **LSAT score alone recovers race at 0.716** |
+| **07** the same test on real data | Notebook 1's result depends on a generator I wrote | UCI Adult: **0.938**, still **0.644** after six removals. German Credit: sex hides inside `personal_status`, **0.699 ± 0.036**. LSAC: **LSAT score alone recovers race at 0.716** |
 
 ![Debiasing word embeddings](figures/04_lipstick.png)
 
@@ -93,9 +98,18 @@ claim to the paper behind it.
 
 ## Other results
 
+Mitigation under 10(2)(g) is post-processing with per-group thresholds:
+
 ```
-Overall hire rate  original 37.8%  ->  corrected 32.0%
+Overall hire rate  original 37.8%  ->  corrected 38.6%
+  newly hired 90    no longer hired 86
+  Man 42.7% -> 38.9%    Woman 33.5% -> 38.4%    Non-binary 31.6% -> 36.8%
 ```
+
+An earlier version multiplied the observed label by a weight, which gave every
+rejected candidate p=0. It could only un-hire people, so it reached parity by
+levelling down and dropped the overall rate to 32.0%. That is kept in the
+notebook as a documented failure rather than deleted.
 
 Final checklist: **2 PASS, 2 WARN, 1 FAIL**. One failure has to be resolved
 before deployment.
