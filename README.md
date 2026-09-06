@@ -4,7 +4,7 @@ A worked notebook on what Article 10 actually asks of an HR system, and how to
 test for it. HR screening is Annex III high risk, so Article 10 applies in full.
 
 The Article 10 notebook at the repo root runs entirely on synthetic data - no
-real candidates, no PII. The seven notebooks in `notebooks/` are a separate
+real candidates, no PII. The nine notebooks in `notebooks/` are a separate
 strand and several of them use real public benchmarks; see that section.
 
 ## What it covers
@@ -93,7 +93,7 @@ discriminated against, and the report will look clean.
 
 ## notebooks/
 
-Eight notebooks that test the standard bias-mitigation moves rather than
+Nine notebooks that test the standard bias-mitigation moves rather than
 describing them. Each one states a claim, runs it, and reports what happened.
 All outputs are committed, so they read without being run.
 
@@ -107,6 +107,7 @@ All outputs are committed, so they read without being run.
 | **06** COMPAS | The recidivism fight had a right answer | Calibrated for both races **and** false positive rate 42.3% vs 22.0%. Both sides correct. Equalising one breaks the others, drawn as two group ROC curves with each rule marked on them |
 | **07** the same test on real data | Notebook 1's result depends on a generator I wrote | UCI Adult: **0.938**, still **0.644** after six removals. **ACSIncome** (the dataset that replaced Adult): 0.814 down to **0.534**, so the effect is real but smaller on modern data. German Credit: sex hides inside `personal_status`, **0.699 ± 0.036**. LSAC: **LSAT alone recovers race at 0.716**. And an income model never shown `sex` is calibrated within both sexes at base rates of 31% and 12% |
 | **08** constrained learning | Pick a criterion, hand it to a library, done | On Adult with `fairlearn`: accuracy moves **at most 0.023**. Enforcing demographic parity takes the selection ratio 0.33 to **0.99** and the PPV gap 0.007 to **0.289**. Enforcing equalised odds closes both error gaps to **≤0.017** and leaves the selection ratio at **0.52**, still a four-fifths failure |
+| **09** causal questions | The COMPAS disparity can be read off the file | **Two thirds of the "recidivism" label is a misdemeanour arrest** and 23.3% is violent, so it measures offending *plus* enforcement. Two simulated worlds - offending differs, or policing differs - both match the published base rates and prior counts, and both produce a ~2x false positive gap; their true offending ratios are **1.33 and 1.07**. Controlling for priors removes **61%** of the race coefficient in one and **57%** in the other, so the standard fix cannot tell them apart. Dressel & Farid replicates: age + priors scores **0.728** against COMPAS's **0.711** |
 
 ![Debiasing word embeddings](figures/04_lipstick.png)
 
@@ -122,7 +123,10 @@ adversary is still far from chance. The largest single drop comes from
 
 Notebooks 1, 2, 3 and 5 use synthetic data, because they need ground truth: you
 cannot score a bias test against the bias that was injected unless you injected
-it. Notebooks 4, 6 and 7 use real data - GloVe 300d, the ProPublica COMPAS file,
+it. Notebook 9 uses both, for the same reason: the sensitivity analysis is scored
+against a confounder whose strength is known, and the two COMPAS worlds are
+simulated precisely so that the true offending rate exists to be printed.
+Notebooks 4, 6 and 7 use real data - GloVe 300d, the ProPublica COMPAS file,
 and UCI Adult, German Credit and LSAC law school admissions - so the results do not rest on a generator I
 wrote. Notebook 7 exists specifically to re-run notebook 1's test on data I did
 not construct, and the effect is larger there.
@@ -139,6 +143,14 @@ on the same split and prices them.
 *Notebook 8. Five arms, one held-out split. The accuracy column barely moves. The
 selection ratio and the three error gaps move a great deal, and never in the same
 direction.*
+
+![Two worlds, one file](figures/09_causal.png)
+
+*Notebook 9. Left: adjusting for a confounder you measured badly. A proxy with
+reliability 0.86 - correlation 0.93 with the truth - still leaves 45% of the bias
+in place. Right: two simulated worlds that agree on every number in the COMPAS
+file and disagree completely about what is happening. The quantity that separates
+them appears in no column.*
 
 The sources are in `papers/`, 13 open-access PDFs with a README mapping each
 claim to the paper behind it. Barocas, Hardt & Narayanan's textbook is among
@@ -214,7 +226,11 @@ not.
 
 Open `eu_ai_act_article10_hr_compliance.ipynb`. Needs numpy, pandas and
 matplotlib and scikit-learn. The notebooks in `notebooks/` additionally use
-gensim (04), fairlearn (08) and folktables (07); everything else is stdlib. Run all cells; every number in this README is
+gensim (04), folktables (07), fairlearn (08) and scipy plus dowhy (09);
+everything else is stdlib. Notebook 9 uses `dowhy` in one cell only, to show that
+it returns the same estimate as five lines of least squares - pass the graph as a
+`networkx.DiGraph`, since the documented `dot`-string path is broken against
+`pydot` 4.0.1. Run all cells; every number in this README is
 reproduced exactly, because every generator is seeded.
 
 To point it at real data, replace `generate_synthetic_resumes()` with an ATS

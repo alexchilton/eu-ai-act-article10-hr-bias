@@ -12,8 +12,8 @@ notebook that uses it.
 | `kleinberg-2016-inherent-tradeoffs.pdf` | Kleinberg, Mullainathan, Raghavan, *Inherent Trade-Offs in the Fair Determination of Risk Scores*. First impossibility result. [arXiv:1609.05807](https://arxiv.org/abs/1609.05807) |
 | `chouldechova-2017-fair-prediction.pdf` | Chouldechova, *Fair Prediction with Disparate Impact*. The second impossibility result, written directly about recidivism scoring. [arXiv:1610.07524](https://arxiv.org/abs/1610.07524) |
 | `corbett-davies-2018-measure-and-mismeasure.pdf` | Corbett-Davies, Gaebler, Nilforoshan, Shroff & Goel, *The Measure and Mismeasure of Fairness* (JMLR 2023; the 2018 arXiv preprint is Corbett-Davies & Goel). The strongest critique of naive fairness constraints, including the case that they can make everyone worse off. [arXiv:1808.00023](https://arxiv.org/abs/1808.00023) |
-| `kusner-2017-counterfactual-fairness.pdf` | Kusner, Loftus, Russell, Silva, *Counterfactual Fairness*. [arXiv:1703.06856](https://arxiv.org/abs/1703.06856) |
-| `kilbertus-2017-causal-reasoning.pdf` | Kilbertus et al., *Avoiding Discrimination through Causal Reasoning*. Separates a legitimate causal path from a discrimination channel. [arXiv:1706.02744](https://arxiv.org/abs/1706.02744) |
+| `kusner-2017-counterfactual-fairness.pdf` | Kusner, Loftus, Russell, Silva, *Counterfactual Fairness*. Used in notebook 9. [arXiv:1703.06856](https://arxiv.org/abs/1703.06856) |
+| `kilbertus-2017-causal-reasoning.pdf` | Kilbertus et al., *Avoiding Discrimination through Causal Reasoning*. Separates a legitimate causal path from a discrimination channel. Notebook 9 is the case where the separation cannot be made, because the graph is the disagreement. [arXiv:1706.02744](https://arxiv.org/abs/1706.02744) |
 | `elazar-2018-adversarial-removal.pdf` | Elazar & Goldberg, *Adversarial Removal of Demographic Attributes from Text Data*. Adversarial training removes the attribute from the classifier, not from the representation. [arXiv:1808.06640](https://arxiv.org/abs/1808.06640) |
 | `gonen-2019-lipstick-on-a-pig.pdf` | Gonen & Goldberg, *Lipstick on a Pig*. Debiasing word embeddings hides the bias rather than removing it. [arXiv:1903.03862](https://arxiv.org/abs/1903.03862) |
 | `buolamwini-2018-gender-shades.pdf` | Buolamwini & Gebru, *Gender Shades* (FAccT 2018). Representativeness as a measurable data-quality failure. |
@@ -59,11 +59,35 @@ Linked rather than downloaded. Each is named where it is used.
 - **Bertrand & Mullainathan (2004), _Are Emily and Greg More Employable than
   Lakisha and Jamal?_, AER.** The resume audit design. Referenced as the
   experiment the root notebook does not run.
+- **Westreich & Greenland (2013), _The Table 2 Fallacy_, Am J Epidemiol
+  177(4):292-298.** One regression returns k coefficients and at most one of them
+  is a causal effect. Notebook 9 section 1b demonstrates it: adding a mediator
+  raises R-squared from 0.578 to 0.742 and drives one true coefficient of +0.60
+  to -0.010, while the other stays correct.
+- **Cinelli & Hazlett (2020), _Making Sense of Sensitivity: Extending Omitted
+  Variable Bias_, JRSS-B 82(1):39-67.** The robustness value. Notebook 9 runs it
+  where the confounder is known, and the bias bound recovers the true bias to
+  four decimals - while showing that the headline robustness value alone would
+  have cleared a confounder that fully explains the estimate.
+  <https://carloscinelli.com/files/Cinelli%20and%20Hazlett%20(2020)%20-%20Making%20Sense%20of%20Sensitivity.pdf>
+- **Dressel & Farid (2018), _The accuracy, fairness, and limits of predicting
+  recidivism_, Science Advances 4(1).** COMPAS is matched by a two-feature model.
+  Replicated in notebook 9: age and prior count reach AUC 0.728 against the
+  137-item instrument's 0.711. Open access.
+  <https://www.science.org/doi/10.1126/sciadv.aao5580>
+- **Holland (1986), _Statistics and Causal Inference_, JASA 81(396):945-960**, and
+  **Greiner & Rubin (2011), _Causal Effects of Perceived Immutable
+  Characteristics_, Rev Econ Stat 93(3):775-785.** No causation without
+  manipulation, and what is actually manipulable when the attribute is race.
+  Notebook 9 section 4.
 
 ## Data
 
 `../data/compas-scores-two-years.csv` is the ProPublica COMPAS release, from
-<https://github.com/propublica/compas-analysis>. 7,214 rows. Used in notebook 6.
+<https://github.com/propublica/compas-analysis>. 7,214 rows. Used in notebooks 6
+and 9. Note that its `two_year_recid` column records a re-arrest, not a
+reoffence: 67.6% of the events it counts are misdemeanour arrests and 23.3% are
+violent. Notebook 9 section 3 is about what follows from that.
 
 `../data/acs/` is the folktables cache: the 2018 one-year ACS person file for
 California, 378,817 rows, downloaded on first run by notebook 7. It is US Census
