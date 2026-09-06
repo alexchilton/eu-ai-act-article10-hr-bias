@@ -69,6 +69,18 @@ All outputs are committed, so they read without being run.
 | **06** COMPAS | The recidivism fight had a right answer | Calibrated for both races **and** false positive rate 42.3% vs 22.0%. Both sides correct. Equalising one breaks the others |
 | **07** the same test on real data | Notebook 1's result depends on a generator I wrote | UCI Adult: **0.938**, still **0.644** after six removals. German Credit: sex hides inside `personal_status`, **0.688**. LSAC: **LSAT score alone recovers race at 0.716** |
 
+![Debiasing word embeddings](figures/04_lipstick.png)
+
+*Notebook 4. Hard-debiasing drives the projection onto the gender direction to
+exactly zero, which is the metric the method optimises. An SVM still recovers
+gender at 98.2%.*
+
+![Adversary AUC on UCI Adult](figures/07_adult_decay.png)
+
+*Notebook 7. Real census data. Six successive feature removals, and the
+adversary is still far from chance. The largest single drop comes from
+`relationship`, because that column contains "Husband" and "Wife".*
+
 Notebooks 1, 2, 3 and 5 use synthetic data, because they need ground truth: you
 cannot score a bias test against the bias that was injected unless you injected
 it. Notebooks 4, 6 and 7 use real data - GloVe 300d, the ProPublica COMPAS file,
