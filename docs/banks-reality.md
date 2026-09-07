@@ -239,7 +239,7 @@ In credit the proportionality defence is still live.
 |---|---|---|
 | Who acts | national market surveillance authority | an individual, in national court |
 | The wrong | failure to examine, document, mitigate | your model disadvantaged me |
-| Penalty | up to EUR 15M or 3% of global turnover (Art 99(4)) | damages, injunction, reputation |
+| Penalty | up to EUR 15M or 3% of worldwide turnover (Art 99(4); tiers in section 10) | damages, injunction, reputation |
 | Burden | on you to produce the file | shifts to you on a prima facie case |
 
 Article 74(6) designates the **financial supervisor** as market surveillance
@@ -587,6 +587,122 @@ The uncomfortable version: the methods being adopted are the ones that fit the
 legal vocabulary, not the ones most likely to be right.
 Those two sets overlap by accident rather than by design.
 
+## 10. What Microsoft actually ships, and what would change any of this
+
+### Fairlearn is not the whole stack, and section 9 should not be read as saying so
+
+Microsoft's responsible-AI tooling also includes InterpretML (glassbox EBMs),
+DiCE (counterfactual *explanations*, which are not counterfactual fairness),
+Error Analysis, **EconML** for heterogeneous treatment effects, and **DoWhy** -
+which came out of Microsoft Research and is the library notebook 9 uses.
+The Azure ML responsible-AI dashboard bundles these into one interface.
+Fairlearn itself is no longer Microsoft-governed; it moved to independent
+community governance.
+
+Confidence: only `fairlearn 0.14.0` and `dowhy 0.14` are installed on this
+machine - `econml`, `interpret`, `dice-ml`, `responsibleai`, `raiwidgets` and
+`aif360` are all absent, checked 2026-09-07 - so the dashboard's exact
+composition here is recall and not measured.
+
+### The finding worth having
+
+**One organisation built both halves and did not connect them.**
+
+Fairlearn returns 0 files for `causal`, `counterfactual`, `backdoor` and
+`do_operator` (measured, section 9).
+DoWhy and EconML live in a separate stack, PyWhy, now co-maintained with AWS.
+The dashboard places them in adjacent tabs, where the causal tab estimates
+treatment effects on features and does not do causal fairness.
+
+This is not negligence.
+Joining them requires the graph, and the graph is the thing that cannot be
+supplied, validated or defended - section 9 again.
+The connection is missing inside the one organisation that owns both pieces, for
+a structural reason rather than a lazy one.
+
+### Article 99, since section 5 cites it without stating it
+
+Penalties under Regulation (EU) 2024/1689, each cap being whichever is *higher*:
+
+| Breach | Cap |
+|---|---|
+| Article 5 prohibited practices | EUR 35M or **7%** of worldwide annual turnover |
+| Other obligations - providers (Art 16), deployers (Art 26), importers, distributors, notified bodies, Art 50 transparency | EUR 15M or **3%** |
+| Incorrect, incomplete or misleading information to authorities | EUR 7.5M or **1%** |
+
+Turnover is total worldwide, not EU revenue.
+Article 99(6) inverts the rule for SMEs and start-ups - whichever is *lower* -
+so the fixed sum shelters small firms rather than the percentage punishing them.
+
+A credit model lands in the 3% tier.
+Article 10 binds providers of high-risk systems, and provider non-compliance is
+99(4).
+The 7% tier is reserved for the Article 5 prohibitions.
+Credit scoring is explicitly not social scoring - Recital 31 says so, and
+Annex III 5(b) classifies it as high-risk instead.
+
+Adjacent: Article 100 covers EU institutions (EUR 1.5M / 750k, imposed by the
+EDPS) and Article 101 covers general-purpose AI model providers (EUR 15M or 3%,
+imposed by the Commission).
+The penalty provisions applied from 2 August 2025; the Annex III high-risk
+obligations, which is where credit scoring sits, apply from 2 August 2026.
+Nothing has landed on anyone yet.
+
+### Why weak assessments are the rational choice right now
+
+**The documentation duty can reward the weaker method.**
+Run a strong analysis, find a large disparity, and you have created a document
+stating that you found a large disparity - discoverable in litigation and
+reportable to a supervisor.
+Run a weak analysis, find nothing, and you hold a clean file satisfying the same
+obligation.
+The incentive gradient points at methods that do not find things.
+Nobody needs to be cynical for this to operate; it is enough that the people who
+look harder are marginally less likely to be promoted.
+
+**The cost asymmetry sits in the wrong place in the lifecycle.**
+A bias finding at design time is cheap - change the label, change the features,
+retrain.
+A finding after deployment means retrain, revalidate, re-approve, possibly
+remediate past decisions and possibly disclose.
+So the incentive to look hard falls exactly as the cost of finding something
+rises, and governance frameworks concentrate the heaviest assessment at the
+pre-deployment gate, the last moment before that step change.
+
+**The ambiguous result is the common case and the worst one.**
+A clear finding is actionable.
+An ambiguous finding is a decision about how much more to spend investigating,
+taken by the person whose budget it is, against a ship date.
+Ambiguity resolves toward no action by default.
+
+**Usually nobody decided.**
+"Not rocking the boat" implies a choice was made.
+More often the assessment goes to a vendor or a junior, on a template, with a
+deadline, and there is no moment at which anyone weighed looking harder against
+not looking.
+The absence of a decision point is how most of this happens.
+
+### The argument against reading all of the above as cynicism
+
+This is what every compliance regime looks like early.
+SOX in 2003 was box-ticking.
+Bank model validation in the early 1990s was box-ticking.
+Both improved, and the mechanism in both cases was enforcement creating real
+cost, plus a professional class forming with its own standards and personal
+liability.
+Fairness governance is at roughly SOX-2003.
+That is a timeline, not a defence.
+
+There is already a clean natural experiment.
+The CFPB auto-lending wave changed industry behaviour, and nothing in the
+tooling changed - Ally paid $98M.
+The cost of a weak assessment changed.
+
+So the prediction, stated as a prediction: this remains theatre until a penalty
+lands on someone identifiable, and then it stops being theatre fairly quickly.
+Better libraries will not do it.
+Article 99 might.
+
 ## Sources named above, not all verified in session
 
 Bundled in `../papers/`: Dwork et al. (2012); Corbett-Davies et al. (JMLR 2023);
@@ -599,8 +715,13 @@ payday-lending access, who disagree with each other.
 Named in section 9: Plecko & Meinshausen, `fairadapt` (R); Plecko & Bareinboim,
 *Causal Fairness Analysis* and `faircause`; the PyWhy stack (DoWhy, EconML).
 
-Software enumerated in section 9: `fairlearn 0.14.0`, `scikit-learn 1.7.1`,
-`python3.12`, 2026-09-07.
+Software enumerated in sections 9 and 10: `fairlearn 0.14.0`,
+`scikit-learn 1.7.1`, `dowhy 0.14`, `python3.12`, 2026-09-07.
+Absent on this machine and therefore not checked: `econml`, `interpret`,
+`dice-ml`, `responsibleai`, `raiwidgets`, `aif360`.
+
+Section 10 adds: Regulation (EU) 2024/1689 Articles 99, 100, 101 and Recital 31;
+Microsoft InterpretML, DiCE, Error Analysis, EconML, DoWhy (PyWhy).
 
 Legal instruments referenced, none read in this session:
 Regulation (EU) 2024/1689 Articles 9, 10, 11, 15, 27, 74, 86, 99, Annex III 5(b);
