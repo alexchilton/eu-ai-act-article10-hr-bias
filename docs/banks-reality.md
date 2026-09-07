@@ -331,15 +331,139 @@ category standing in for it.
 Substituting the direct measurable risk for the category is usually both fairer
 and more accurate at once.
 
+## 8. Is refusing a loan a favour?
+
+Raised against the framing above: default is genuinely bad for the borrower.
+Repossession, garnishment, a credit file damaged for years, bankruptcy.
+So if you can see someone is likely to default and you decline, are you not
+helping them, whatever the reason?
+
+The objection is stronger than it looks, and the law agrees with more of it than
+most commentary admits.
+
+### Where it is right
+
+**Responsible-lending rules already mandate exactly this.**
+US Dodd-Frank Title XIV and the CFPB ATR/QM rule (2013) make it unlawful to
+originate a mortgage without a reasonable good-faith determination that the
+borrower can repay.
+The EU has the same duty in Mortgage Credit Directive 2014/17 Article 18 and in
+the consumer credit creditworthiness obligation.
+Both exist because 2008 was caused by doing the opposite.
+
+So the law does not hold that denial is a harm.
+It holds that denial *on the wrong basis* is a harm.
+Those are different claims and the fairness literature routinely runs them
+together.
+
+**The formal version is a published result.**
+Liu, Dean, Rolnick, Simchowitz & Hardt (2018), *Delayed Impact of Fair Machine
+Learning* (ICML), models the borrower's trajectory after the decision and shows
+that a demographic-parity or equal-opportunity constraint can actively harm the
+group it was imposed to protect, because over-lending drives scores down.
+Corbett-Davies et al. make a related argument in the bundled JMLR paper.
+
+### Where it breaks
+
+**It proves too much.**
+If denial is a favour then denying everyone is maximum beneficence, and a lender
+that approves nobody is a saint.
+The argument needs a threshold, and where the threshold sits is the original
+question untouched.
+Beneficence relocates the problem; it does not answer it.
+
+**The counterfactual is not "no loan".**
+The declined applicant still needs the money.
+They go to a payday lender, a doorstep lender, a pawnbroker, or family.
+Denial routes people down the credit ladder, not off it, so "I saved them from a
+12% loan" can mean "I sent them to a 300% one".
+The empirical literature on whether payday access helps or harms is genuinely
+contested - Zinman, Melzer and Morse reach different conclusions - so this does
+not settle in either direction.
+But the comparison is loan versus alternative, never loan versus nothing.
+
+**"You know they will default" is doing enormous work.**
+At a 20% predicted default rate you decline 100 people to prevent 20 defaults,
+and 80 of them would have repaid.
+Precision is worst exactly where it matters: for the marginal applicant at the
+cutoff the model is close to a coin flip.
+You almost never know someone will default.
+You know they sit in a bucket where one in five does.
+
+**The beneficence coincides exactly with self-interest.**
+The lender's downside from a default is bounded and already priced into the rate.
+The borrower's is not.
+The party claiming to decline for your own good is the party that captures the
+gain from declining.
+That is not proof of bad faith, but it makes the paternalistic justification
+unfalsifiable from outside, which is why no legal system accepts it as a defence
+on its own.
+
+**Denial compounds.**
+Credit access builds credit history.
+Decline, thin file, worse score, declined again.
+The denial is an input to the next decision, so a model that is accurate at t=0
+manufactures by t=1 the disparity it predicted.
+This is the mechanism by which redlining outlived the maps.
+Denial is not a neutral non-event.
+
+**Default is partly the lender's decision, not the borrower's property.**
+Likely to default at what rate?
+Offer 8% and they repay; offer 29% and they do not.
+The model predicts default conditional on the treatment the lender chose.
+Reading that as a trait of the person is the error in section 7 above, and the
+same error notebook 9 documents in COMPAS.
+
+### Where the law really is strange
+
+Not quite where the objection puts it, but nearby.
+
+Disparate-impact doctrine can require dropping a feature that genuinely predicts
+default.
+That makes lending decisions worse, and somebody defaults who otherwise would
+not have.
+The cost is real, it lands on real people, and the doctrine rarely states it out
+loud.
+*Test-Achats* did precisely this in insurance: the Court knew the actuarial
+difference was real and prohibited its use anyway.
+
+So European law does knowingly accept worse predictions in some places.
+It holds that equal treatment is worth that price.
+That is a value judgement made in the open.
+It can be disagreed with; it is not a confusion.
+
+### What the objection actually exposes
+
+Every fairness metric in this repo - DIR, demographic parity, equal opportunity -
+treats **approval rate as if it were welfare**.
+It is not.
+An approval ending in repossession is not a benefit, and the objection is correct
+that the metrics cannot tell the difference.
+
+The conclusion is not "accuracy is fine after all".
+It is **measure welfare, not approval rate**.
+Almost nobody does, because default is observable in the data and welfare is not.
+That is a measurement failure the field has built its whole evaluation apparatus
+on top of.
+
+Which lands back where notebook 2 already sits: the label chosen is what does the
+damage, not the classifier fitted to it.
+
 ## Sources named above, not all verified in session
 
 Bundled in `../papers/`: Dwork et al. (2012); Corbett-Davies et al. (JMLR 2023);
 Kusner et al. (2017); Kilbertus et al. (2017).
-Cited not bundled: Lakkaraju et al. (2017); Kamiran & Calders (2012).
+Cited not bundled: Lakkaraju et al. (2017); Kamiran & Calders (2012);
+Liu, Dean, Rolnick, Simchowitz & Hardt (2018), *Delayed Impact of Fair Machine
+Learning* (ICML) - <https://arxiv.org/abs/1803.04383>.
+Named without a specific citation in section 8: Zinman, Melzer and Morse on
+payday-lending access, who disagree with each other.
 
 Legal instruments referenced, none read in this session:
 Regulation (EU) 2024/1689 Articles 9, 10, 11, 15, 27, 74, 86, 99, Annex III 5(b);
 Directives 2000/43/EC, 2000/78/EC, 2004/113/EC;
 CJEU C-236/09 *Test-Achats*;
 US ECOA / Regulation B, HMDA / Regulation C, ECOA section 1002.8;
-CFPB BISG methodology (2014) and SPCP advisory opinion (2021).
+CFPB BISG methodology (2014) and SPCP advisory opinion (2021);
+US Dodd-Frank Title XIV and the CFPB ATR/QM rule (2013);
+Directive 2014/17/EU Article 18 and the consumer credit creditworthiness duty.
