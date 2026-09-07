@@ -217,6 +217,13 @@ not.
   It is not legal advice and it does not decide whether the exception applies.
 - Correcting a disparity in the data does not make the system compliant. It is
   one of several obligations.
+- Notebook 9's two COMPAS worlds are each fitted to **four marginals only** - the
+  two base rates and the two mean prior counts. The file contains far more
+  constraints than that: the full decile distribution, the age-by-race joint, the
+  charge-degree mix, the shape of the priors distribution rather than its mean.
+  I have not checked whether either world survives those. So the claim is
+  narrower than "the data cannot decide": four marginals cannot decide, and I
+  stopped there. Testing the rest could rule out one world, or both.
 - The name-flip audit in Section 2 is run against a model fitted on 500 rows.
   Its placebo arm flips 106 of 500 decisions on its own, so read the group means
   and not the flip counts. The gender effect clears that floor (+0.064 against
