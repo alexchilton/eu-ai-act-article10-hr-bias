@@ -666,6 +666,82 @@ under Article 6(2), and 2 August 2028 under Article 6(1).
 Nothing has landed on anyone yet, and on this timetable nothing can for another
 fifteen months.
 
+### Where "just remove the attribute" comes from
+
+**Measured.** The IAPP AIGP Body of Knowledge and Exam Blueprint, v2.0.1, was
+downloaded on 2026-09-07 and grepped.
+Nine pages, 17,148 characters of extracted text.
+
+    bias                 2   both inside parenthetical example lists
+    fairness             1   inside a list of principles
+    protected            0
+    sensitive attribute  0
+    demographic          0
+    proxy                0
+    disparate            0
+
+Every occurrence in full:
+
+- "types of risks and harms posed by AI (e.g., misalignment with objectives,
+  **ethics and bias risk**, and complexity and scalability)"
+- "common principles of responsible AI (e.g., **fairness**, safety and
+  reliability, privacy and security...)"
+- "Plan and perform training and testing of the AI model (e.g., unit,
+  integration, validation, performance, **bias** and interpretability)"
+- "Understand how **non-discrimination laws** apply to AI (e.g., in the
+  employment, credit, lending, housing and insurance contexts)"
+
+The last one names this document's exact domain, and it is a single knowledge
+statement with no method attached.
+
+**So the blueprint does not prescribe removing the protected attribute.
+It prescribes nothing.**
+It is an outline.
+Note the limit of this measurement: it covers the published blueprint only.
+The courseware, textbooks and question banks built on top of it were not
+examined, and they are where the actual teaching happens.
+
+Blinding is what grows in that gap, for four reasons:
+
+- **It is legally correct in the most salient domain.**
+  Regulation B requires removing sex and race from most US consumer credit.
+  The material generalises a domain-specific legal mandate into a universal
+  design principle.
+  That is the mechanism of the error and it is an understandable one.
+- **It is the only version that can be a multiple-choice question.**
+  "Remove protected attributes" has an unambiguous answer.
+  "Test whether P(Y|X) differs by group, then decide whether the disparity is
+  justified and document why" cannot be examined that way.
+  Certification selects for propositions with clean answers.
+  That is not a defect of one certificate; it is what certification is.
+- **The reader can verify it.**
+  A compliance officer can confirm a column was dropped.
+  They cannot evaluate a proxy analysis.
+- **GDPR minimisation points the same way.**
+  Two regimes say hold less data.
+  The third - you need the attribute to audit - is the one that gets dropped.
+
+### The sentence that gets compressed
+
+- *"Do not use protected attributes in the decision"* - correct, and often
+  legally required.
+- *"Do not hold them at all"* - wrong, and it destroys the ability to detect the
+  problem.
+
+All of the damage is in the collapse between those two sentences.
+
+The tell that the drafters knew this: **the AI Act needed an explicit
+derogation.**
+Article 10(5), now Article 4a, exists solely to permit processing
+special-category data for bias detection.
+Nobody writes a derogation unless the prevailing default is blocking the thing.
+
+The practical harm is not a passive knowledge gap.
+It is that the training produces people with authority who will **object**, in
+good faith and citing data minimisation, when a data scientist asks to retain
+gender in order to audit for gender bias.
+An institutional veto pointed the wrong way is worse than not knowing.
+
 ### Why weak assessments are the rational choice right now
 
 **The documentation duty can reward the weaker method.**
@@ -739,7 +815,10 @@ Absent on this machine and therefore not checked: `econml`, `interpret`,
 `dice-ml`, `responsibleai`, `raiwidgets`, `aif360`.
 
 Section 10 adds: Regulation (EU) 2024/1689 Articles 99, 100, 101 and Recital 31;
-Microsoft InterpretML, DiCE, Error Analysis, EconML, DoWhy (PyWhy).
+Microsoft InterpretML, DiCE, Error Analysis, EconML, DoWhy (PyWhy);
+IAPP *AIGP Body of Knowledge and Exam Blueprint* v2.0.1, downloaded and text-
+extracted 2026-09-07 -
+<https://iapp.org/media/pdf/certification/AIGP_Cert_BOK_FINAL_012925_2.0.1.pdf>.
 
 Legal instruments referenced, none read in this session:
 Regulation (EU) 2024/1689 Articles 4a, 9, 10, 11, 15, 27, 43, 74, 85, 86, 99,
