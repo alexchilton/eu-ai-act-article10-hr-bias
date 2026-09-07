@@ -7,13 +7,19 @@ and 30% of women, remove gender, both come out near 45%, done.
 **Provenance, because this file is different from the rest of the repo.**
 Everything else here is measured - a notebook runs, a number comes out, and the
 number is in the README.
-This file is not.
-It is legal and industry background, cited from memory of the sources named, and
-not verified against the primary texts in this session.
+This file is mostly not.
+Sections 1-8 are legal and industry background, cited from memory of the sources
+named, and not verified against the primary texts in this session.
 Article and case numbers should be checked before any of it is repeated
 somewhere that matters.
 Where I am unsure I say so inline.
-Nothing in this file is a finding of this repo.
+
+**Section 9 is the exception and is measured**: the Fairlearn API counts and
+method signatures in it came from importing `fairlearn 0.14.0` under
+`python3.12` on this machine on 2026-09-07 and enumerating the package.
+Those numbers are checkable by re-running the same import.
+
+Nothing else in this file is a finding of this repo.
 
 ---
 
@@ -449,6 +455,138 @@ on top of.
 Which lands back where notebook 2 already sits: the label chosen is what does the
 damage, not the classifier fitted to it.
 
+## 9. What Fairlearn covers, and why the causal work is not in production
+
+**This section is measured**, unlike the rest of this file.
+The API counts below came from `fairlearn 0.14.0` installed under
+`python3.12` on this machine on 2026-09-07, by importing the package and
+enumerating it.
+Notebook 8 already uses this library.
+
+### What is in the box
+
+| Submodule | Public objects | What it does |
+|---|---|---|
+| `metrics` | 41 | `MetricFrame` plus group differences and ratios |
+| `reductions` | 17 | `ExponentiatedGradient`, `GridSearch`, constraint moments |
+| `postprocessing` | 2 | `ThresholdOptimizer`, its plot |
+| `preprocessing` | 2 | `CorrelationRemover`, `PrototypeRepresentationLearner` |
+| `adversarial` | 2 | `AdversarialFairnessClassifier` / `Regressor` |
+
+Grepping the installed package source for causal vocabulary returns nothing:
+
+    causal             0 files
+    counterfactual     0 files
+    DirectedAcyclic    0 files
+    do_operator        0 files
+    backdoor           0 files
+
+So Fairlearn covers the **metrics** in section 5 of this file and nothing else in
+it.
+It measures disparity and it enforces constraints.
+It has no view on the label, no selective-labels tooling, no proxy discovery, no
+welfare model, no legal mapping, no sensitivity analysis and no reject inference.
+`CorrelationRemover` is linear proxy removal, which is the operation notebook 5
+shows does not work.
+
+### The signature that matters for lending
+
+    ThresholdOptimizer.predict(self, X, *, sensitive_features, random_state=None)
+    ExponentiatedGradient.predict(self, X, random_state=None)
+    GridSearch.predict(self, X)
+
+`sensitive_features` is a **required keyword-only argument** on
+`ThresholdOptimizer.predict`.
+The method cannot be called without the protected attribute at inference time,
+because it applies group-specific thresholds.
+That is disparate treatment on its face and unusable in a US credit decision.
+
+The reductions are better placed: they need the attribute at `fit` but not at
+`predict`.
+Whether a decision rule whose parameters were *fitted* using race counts as
+treatment is genuinely contested and not settled either way.
+Notebook 8 uses `ExponentiatedGradient`, so it sits on the defensible side of
+that line, but not by much.
+
+### Why there is no causal module
+
+Structural, not an oversight.
+Fairlearn's whole vocabulary is observational - functions of `(y, y_hat, A)`.
+Causal fairness needs a **graph**, and a graph is an input the library cannot
+supply, cannot validate, and cannot check against the data.
+There is no API for "draw the correct DAG".
+This is not a gap that gets filled in a later release.
+
+The tooling exists elsewhere and is research code: DoWhy and EconML in the PyWhy
+stack, `fairadapt` (Plecko & Meinshausen, R), and `faircause` from Plecko &
+Bareinboim's *Causal Fairness Analysis*.
+Little of it is production-hardened and much of it is R.
+
+### Why organisations do not use it
+
+Four reasons, and the third is the load-bearing one.
+
+**The graph is a liability in an adversarial proceeding.**
+A DAG is an assumption set.
+Opposing counsel asks why there is no arrow from X to Y and there is no
+data-driven answer.
+Notebook 9's finding is exactly that two graphs fit the same data.
+In science that is a result.
+In a deposition it is a hole.
+A regression coefficient with a p-value is defensible not because it is better
+but because there are forty years of precedent for arguing about one.
+
+**Sensitivity analysis returns bounds and compliance wants a verdict.**
+"Under assumption set A the effect is 0.03, under B it is 0.11" is not a
+compliance artefact.
+
+**The law does not pose a causal question.**
+Disparate impact asks three things: is there a disparity, is there business
+necessity, is there a less discriminatory alternative.
+None of the three requires identifying a causal effect.
+The doctrine was built on *observable* disparity precisely so that a plaintiff
+would not have to prove causation, which they could never do.
+Causal inference is therefore a correct answer to a question nobody in the
+process is asking.
+The tool and the requirement are orthogonal, and that is not institutional
+stupidity.
+
+**The data is not there.**
+Causal identification needs the confounders measured.
+Lenders hold no wealth data, no household structure, no local labour market.
+Selective labels removes the outcome for exactly the population that would be
+needed.
+The machinery runs on data nobody has.
+
+### Inertia, cynicism, or "it works"?
+
+Mostly the third, with real amounts of the second, and very little of the first.
+The stats teams have read Pearl.
+
+The thing to see is that **the compliance function is not optimising accuracy or
+fairness - it is optimising defensibility**, and it is right to.
+A method that is 10% more correct and 50% less defensible is strictly worse for
+them.
+That is the incentive structure working as designed, not failing.
+Nobody is promoted for a better DAG.
+People are fired for a consent order.
+
+Some of it is knowingly priced in.
+Ally's $98M was not existential against Ally's balance sheet.
+Fair-lending exposure is a line item and gets forecast like one.
+
+But the purely cynical reading is incomplete, because LDA search is being adopted
+now.
+That reveals the real adoption criteria: a method gets in when it is legible to an
+examiner, expressible in existing doctrine, and sold by a vendor who absorbs the
+model risk.
+LDA search meets all three.
+Causal fairness meets none.
+
+The uncomfortable version: the methods being adopted are the ones that fit the
+legal vocabulary, not the ones most likely to be right.
+Those two sets overlap by accident rather than by design.
+
 ## Sources named above, not all verified in session
 
 Bundled in `../papers/`: Dwork et al. (2012); Corbett-Davies et al. (JMLR 2023);
@@ -458,6 +596,11 @@ Liu, Dean, Rolnick, Simchowitz & Hardt (2018), *Delayed Impact of Fair Machine
 Learning* (ICML) - <https://arxiv.org/abs/1803.04383>.
 Named without a specific citation in section 8: Zinman, Melzer and Morse on
 payday-lending access, who disagree with each other.
+Named in section 9: Plecko & Meinshausen, `fairadapt` (R); Plecko & Bareinboim,
+*Causal Fairness Analysis* and `faircause`; the PyWhy stack (DoWhy, EconML).
+
+Software enumerated in section 9: `fairlearn 0.14.0`, `scikit-learn 1.7.1`,
+`python3.12`, 2026-09-07.
 
 Legal instruments referenced, none read in this session:
 Regulation (EU) 2024/1689 Articles 9, 10, 11, 15, 27, 74, 86, 99, Annex III 5(b);
