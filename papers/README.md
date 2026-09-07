@@ -20,6 +20,8 @@ notebook that uses it.
 | `narayanan-2018-21-fairness-definitions.pdf` | Narayanan, *21 Fairness Definitions and Their Politics* (FAccT 2018 tutorial). Why the choice of definition is a value judgement. Talk is on YouTube. |
 | `nist-sp-1270-managing-bias-in-ai.pdf` | NIST SP 1270, *Towards a Standard for Identifying and Managing Bias in AI*. |
 | `barocas-hardt-narayanan-fairness-and-machine-learning.pdf` | Barocas, Hardt, Narayanan, *Fairness and Machine Learning: Limitations and Opportunities* (MIT Press 2023). The textbook. Free at [fairmlbook.org](https://fairmlbook.org/). |
+| `cinelli-2020-making-sense-of-sensitivity.pdf` | Cinelli & Hazlett, *Making Sense of Sensitivity: Extending Omitted Variable Bias* (JRSS-B 2020). The robustness value. Notebook 9 runs it where the confounder is known: the bias bound recovers the true bias to four decimals, while the headline robustness value alone would have cleared a confounder that in fact explains the whole estimate. [doi:10.1111/rssb.12348](https://doi.org/10.1111/rssb.12348) |
+| `dressel-2018-accuracy-fairness-limits.pdf` | Dressel & Farid, *The accuracy, fairness, and limits of predicting recidivism* (Science Advances 2018, CC BY-NC). COMPAS is matched by a two-feature model. Replicated in notebook 9: age and prior count reach AUC **0.728** against the 137-item instrument's **0.711**. [doi:10.1126/sciadv.aao5580](https://doi.org/10.1126/sciadv.aao5580) |
 
 ## Not downloadable, read at the link
 
@@ -64,17 +66,9 @@ Linked rather than downloaded. Each is named where it is used.
   is a causal effect. Notebook 9 section 1b demonstrates it: adding a mediator
   raises R-squared from 0.578 to 0.742 and drives one true coefficient of +0.60
   to -0.010, while the other stays correct.
-- **Cinelli & Hazlett (2020), _Making Sense of Sensitivity: Extending Omitted
-  Variable Bias_, JRSS-B 82(1):39-67.** The robustness value. Notebook 9 runs it
-  where the confounder is known, and the bias bound recovers the true bias to
-  four decimals - while showing that the headline robustness value alone would
-  have cleared a confounder that fully explains the estimate.
-  <https://carloscinelli.com/files/Cinelli%20and%20Hazlett%20(2020)%20-%20Making%20Sense%20of%20Sensitivity.pdf>
-- **Dressel & Farid (2018), _The accuracy, fairness, and limits of predicting
-  recidivism_, Science Advances 4(1).** COMPAS is matched by a two-feature model.
-  Replicated in notebook 9: age and prior count reach AUC 0.728 against the
-  137-item instrument's 0.711. Open access.
-  <https://www.science.org/doi/10.1126/sciadv.aao5580>
+- **Westreich & Greenland (2013)**, **Holland (1986)** and **Greiner & Rubin
+  (2011)** below are paywalled, so they are cited and not bundled. Everything in
+  the table above is open access and redistributable.
 - **Holland (1986), _Statistics and Causal Inference_, JASA 81(396):945-960**, and
   **Greiner & Rubin (2011), _Causal Effects of Perceived Immutable
   Characteristics_, Rev Econ Stat 93(3):775-785.** No causation without

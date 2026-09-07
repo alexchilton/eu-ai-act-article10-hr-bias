@@ -152,7 +152,7 @@ in place. Right: two simulated worlds that agree on every number in the COMPAS
 file and disagree completely about what is happening. The quantity that separates
 them appears in no column.*
 
-The sources are in `papers/`, 13 open-access PDFs with a README mapping each
+The sources are in `papers/`, 15 open-access PDFs with a README mapping each
 claim to the paper behind it. Barocas, Hardt & Narayanan's textbook is among
 them; Chapter 3 is the one these notebooks are a companion to.
 
