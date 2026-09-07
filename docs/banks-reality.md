@@ -4,6 +4,20 @@ Written 2026-09-07.
 Prompted by a Coursera responsible-AI exercise: loans approved for 80% of men
 and 30% of women, remove gender, both come out near 45%, done.
 
+**Legal position as at 7 September 2026.**
+The AI Act was amended by **Regulation (EU) 2026/1744** ("the Digital Omnibus on
+AI"), published 24 July 2026 and in force from 27 July 2026.
+That amendment **deleted Article 10(5)** and moved the legal basis for
+processing special categories of personal data for bias detection into a new
+**Article 4a**: 4a(1) sets six cumulative conditions for providers of high-risk
+systems, and **4a(2) extends the basis to other providers and to deployers**.
+The high-risk timetable also moved: Annex III obligations now apply from
+**2 December 2027** for systems classified under Article 6(2) - which is where
+credit scoring sits - and 2 August 2028 under Article 6(1).
+This file was first written citing Article 10(5) as live law and the old
+2 August 2026 date, and was corrected on 7 September 2026.
+Check for later amendments before relying on any of it.
+
 **Provenance, because this file is different from the rest of the repo.**
 Everything else here is measured - a notebook runs, a number comes out, and the
 number is in the README.
@@ -57,8 +71,8 @@ There is no version where you keep the first and drop the second.
 
 **Blindness destroys measurement.**
 Delete the attribute and you cannot audit for bias in it.
-This is Dwork et al. (2012), and it is why AI Act Article 10(5) exists as a
-derogation at all.
+This is Dwork et al. (2012), and it is why the AI Act carries a derogation for
+holding the attribute at all - Article 10(5) until July 2026, Article 4a since.
 
 ## 2. Blinding can make it worse, not just useless
 
@@ -255,7 +269,7 @@ same model in the same year.
 ### The awkward result
 
 Non-discrimination law says you may not use race in the decision.
-Article 10(5) says you may hold race to prove you did not.
+Article 4a says you may hold race to prove you did not.
 GDPR minimisation says hold as little as possible.
 All three are coherent together, and the outcome is that you must collect a
 protected characteristic in order to demonstrate you ignored it.
@@ -264,18 +278,18 @@ That is exactly the position US mortgage lenders have occupied since HMDA.
 Europe is arriving at the American arrangement through a different door, about
 thirty years later.
 
-### Two things this repo currently gets wrong
-
-Both are open, both are flagged as item 5 in `fable-review-2026-09-06.md`, and
-neither has been fixed:
+### Two things worth keeping straight
 
 - **Gender and age are not GDPR Article 9 special categories.**
-  Article 10(5) is not what permits retaining gender; an ordinary lawful basis
-  is.
-  `01_proxy_detection.ipynb` cell 6 and the root notebook's Section 4 both say
-  otherwise.
-- **Article 10(5) is a *provider* derogation.**
-  A deployer running its own monitoring is not the addressee.
+  Only ethnicity is, of the three attributes this repo tests.
+  Article 4a is not what permits retaining gender; an ordinary Article 6 lawful
+  basis is.
+  This was flagged as item 5 of `fable-review-2026-09-06.md` and the root
+  notebook's Section 3 now states it correctly.
+- **Article 4a(2) reaches deployers, and Article 10(5) did not.**
+  An earlier draft of this file said a deployer running its own monitoring is
+  not the addressee.
+  That was true of 10(5) and is no longer true under 4a.
 
 ### The provision that will actually generate work
 
@@ -286,8 +300,9 @@ creditworthiness assessment and life/health insurance risk pricing, named
 outright.
 A bank running a credit scoring model is a deployer with a FRIA obligation
 regardless of who built the model.
-Credit scoring is Annex III high-risk and the obligations bite from
-2 August 2026.
+Credit scoring is Annex III 5(b), classified under Article 6(2), so the
+obligations bite from **2 December 2027** - pushed back from 2 August 2026 by
+Regulation (EU) 2026/1744.
 
 ## 6. So what would you actually do
 
@@ -300,7 +315,7 @@ In order, and the first one is not optional:
    Expensive, and the only thing that yields an unbiased outcome.
 2. **Keep the attribute for the audit, out of the model** - where the law lets
    you.
-   In the EU that is straightforward for gender and needs Article 10(5) for race.
+   In the EU that is straightforward for gender and needs Article 4a for race.
    In US non-mortgage credit it is not available and you are on BISG.
 3. **Run a per-feature cost-of-fairness table.**
    For each feature carrying disparate impact, fit with and without, record the
@@ -644,9 +659,12 @@ Annex III 5(b) classifies it as high-risk instead.
 Adjacent: Article 100 covers EU institutions (EUR 1.5M / 750k, imposed by the
 EDPS) and Article 101 covers general-purpose AI model providers (EUR 15M or 3%,
 imposed by the Commission).
-The penalty provisions applied from 2 August 2025; the Annex III high-risk
-obligations, which is where credit scoring sits, apply from 2 August 2026.
-Nothing has landed on anyone yet.
+The penalty provisions applied from 2 August 2025.
+The Annex III high-risk obligations, which is where credit scoring sits, were
+pushed back by Regulation (EU) 2026/1744 and now apply from **2 December 2027**
+under Article 6(2), and 2 August 2028 under Article 6(1).
+Nothing has landed on anyone yet, and on this timetable nothing can for another
+fifteen months.
 
 ### Why weak assessments are the rational choice right now
 
@@ -724,7 +742,9 @@ Section 10 adds: Regulation (EU) 2024/1689 Articles 99, 100, 101 and Recital 31;
 Microsoft InterpretML, DiCE, Error Analysis, EconML, DoWhy (PyWhy).
 
 Legal instruments referenced, none read in this session:
-Regulation (EU) 2024/1689 Articles 9, 10, 11, 15, 27, 74, 86, 99, Annex III 5(b);
+Regulation (EU) 2024/1689 Articles 4a, 9, 10, 11, 15, 27, 43, 74, 85, 86, 99,
+Annex III 5(b), as amended by Regulation (EU) 2026/1744 (Digital Omnibus on AI,
+in force 27 July 2026), which deleted Article 10(5) and inserted Article 4a;
 Directives 2000/43/EC, 2000/78/EC, 2004/113/EC;
 CJEU C-236/09 *Test-Achats*;
 US ECOA / Regulation B, HMDA / Regulation C, ECOA section 1002.8;
